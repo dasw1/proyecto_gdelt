@@ -1,0 +1,10 @@
+# models/staging/sources.yml
+version: 2
+
+sources:
+  - name: bronze
+    database: GDELT_BRONZE_DEV
+    schema: STAGING
+    tables:
+      - name: gdelt_export
+        description: "Tabla bronze con los datos crudos de GDELT export"
