@@ -26,3 +26,8 @@ models:
       +materialized: table
       +database: GDELT_GOLD_DEV
       +schema: MARTS
+
+seeds:
+  gdelt:
+    +database: GDELT_BRONZE_DEV
+    +schema: SEEDS

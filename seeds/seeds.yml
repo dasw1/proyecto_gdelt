@@ -1,0 +1,24 @@
+# seeds/schema.yml
+version: 2
+
+seeds:
+  - name: country_list
+    description: "Mapeo de códigos de país FIPS y ISO3 con nombre completo"
+    columns:
+      - name: country_code
+        description: "Código tal como viene en GDELT, puede ser FIPS (2 letras) o ISO3 (3 letras)"
+        tests:
+          - unique
+          - not_null
+      - name: fips_code
+        description: "Código FIPS de 2 letras"
+        tests:
+          - not_null
+      - name: iso3_code
+        description: "Código ISO3 de 3 letras estándar internacional"
+        tests:
+          - not_null
+      - name: country_name
+        description: "Nombre completo del país en inglés"
+        tests:
+          - not_null

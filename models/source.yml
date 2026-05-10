@@ -8,3 +8,10 @@ sources:
     tables:
       - name: gdelt_export
         description: "Tabla bronze con los datos crudos de GDELT export"
+
+  - name: seeds
+    database: GDELT_BRONZE_DEV
+    schema: DBT_GDELT_SEEDS
+    tables:
+      - name: country_list
+        description: "Mapeo de códigos de país FIPS y ISO3 con nombre completo"
