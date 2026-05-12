@@ -10,6 +10,7 @@ SELECT
     -- Actor 1
     ACTOR1CODE                                      AS actor1_code,
     ACTOR1NAME                                      AS actor1_name,
+    MD5(CONCAT(COALESCE(TRIM(UPPER(ACTOR1CODE)), ''), '|', COALESCE(TRIM(ACTOR1NAME), ''))) AS actor1_id,
     ACTOR1COUNTRYCODE                               AS actor1_country_code,
     ACTOR1KNOWNGROUPCODE                            AS actor1_known_group_code,
     ACTOR1ETHNICCODE                                AS actor1_ethnic_code,
@@ -22,6 +23,7 @@ SELECT
     -- Actor 2
     ACTOR2CODE                                      AS actor2_code,
     ACTOR2NAME                                      AS actor2_name,
+    MD5(CONCAT(COALESCE(TRIM(UPPER(ACTOR2CODE)), ''), '|', COALESCE(TRIM(ACTOR2NAME), ''))) AS actor2_id,
     ACTOR2COUNTRYCODE                               AS actor2_country_code,
     ACTOR2KNOWNGROUPCODE                            AS actor2_known_group_code,
     ACTOR2ETHNICCODE                                AS actor2_ethnic_code,
@@ -33,7 +35,9 @@ SELECT
 
     -- Clasificación del evento
     ISROOTEVENT::BOOLEAN                            AS is_root_event,
+    MD5(CONCAT(COALESCE(TRIM(UPPER(EVENTROOTCODE)), ''), '|', COALESCE(TRIM(SUBSTR(EVENTCODE, 3)), ''))) AS cameo_event_id,
     EVENTCODE                                       AS event_code,
+    SUBSTR(EVENTCODE, 3)                            AS event_subcode,
     EVENTBASECODE                                   AS event_base_code,
     EVENTROOTCODE                                   AS event_root_code,
     QUADCLASS::INT                                  AS quad_class,
