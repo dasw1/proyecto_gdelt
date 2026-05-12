@@ -40,7 +40,7 @@ SELECT
     SUBSTR(EVENTCODE, 3)                            AS event_subcode,
     EVENTBASECODE                                   AS event_base_code,
     EVENTROOTCODE                                   AS event_root_code,
-    QUADCLASS::INT                                  AS quad_class,
+    QUADCLASS::INT                                  AS quad_class_id,
     GOLDSTEINSCALE::FLOAT                           AS goldstein_scale,
 
     -- Métricas
@@ -50,6 +50,7 @@ SELECT
     AVGTONE::FLOAT                                  AS avg_tone,
 
     -- Geo acción
+    MD5(CONCAT(COALESCE(TRIM(ACTIONGEO_FULLNAME), ''), '|',COALESCE(TRIM(ACTIONGEO_COUNTRYCODE), ''), '|',COALESCE(TRIM(ACTIONGEO_TYPE::VARCHAR), ''))) AS geo_locations_id,
     ACTIONGEO_TYPE::INT                             AS action_geo_type,
     ACTIONGEO_FULLNAME                              AS action_geo_fullname,
     ACTIONGEO_COUNTRYCODE                           AS action_geo_country_code,
