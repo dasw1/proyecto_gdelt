@@ -6,5 +6,8 @@ Select
     num_mentions,
     num_sources,
     num_articles,
-    avg_tone
+    avg_tone,
+    actor1_id,
+    actor2_id,
+    cameo_event_id
 from {{ ref('__stg_gdelt_export') }}
