@@ -1,0 +1,21 @@
+religion_id,religion_name,parent_id
+CHR,Christianity,
+CTH,Catholic Christianity,CHR
+PRO,Protestant Christianity,CHR
+LDS,Mormon,CHR
+MOS,Islam,
+SUN,Sunni Islam,MOS
+SHI,Shia Islam,MOS
+SFI,Sufi Islam,MOS
+ALE,Alevi Islam,MOS
+JEW,Judaism,
+HSD,Hasidic Judaism,JEW
+HIN,Hinduism,
+BUD,Buddhism,
+SHN,Shinto,
+SIK,Sikhism,
+JAN,Jainism,
+ATH,Atheism,
+PAG,Paganism,
+NRM,New Religious Movement,
+UDX,Unspecified Religion,

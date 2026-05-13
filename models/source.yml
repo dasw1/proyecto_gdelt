@@ -15,3 +15,9 @@ sources:
     tables:
       - name: country_list
         description: "Mapeo de códigos de país FIPS y ISO3 con nombre completo"
+      - name: religion_list
+        description: "Religiones CAMEO con jerarquía padre-hijo"
+      - name: ethnic_list
+        description: "Religiones CAMEO con jerarquía padre-hijo"
+      - name: known_groups_list
+        description: "Religiones CAMEO con jerarquía padre-hijo"

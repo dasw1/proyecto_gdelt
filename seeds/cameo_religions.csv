@@ -1,0 +1,35 @@
+religion_id,religion_name,parent_id
+CHRIS,Christianity,
+CATH,Catholic Christianity,CHRIS
+ORTHO,Orthodox Christianity,CHRIS
+PROT,Protestant Christianity,CHRIS
+EVAN,Evangelical Christianity,CHRIS
+MORM,Mormon,CHRIS
+JEHO,Jehovah's Witness,CHRIS
+ISLAM,Islam,
+SUNNI,Sunni Islam,ISLAM
+SHIA,Shia Islam,ISLAM
+SUFI,Sufi Islam,ISLAM
+JUDEO,Judaism,
+ORTH2,Orthodox Judaism,JUDEO
+REFORM,Reform Judaism,JUDEO
+CONSERV,Conservative Judaism,JUDEO
+HINDU,Hinduism,
+BUDDH,Buddhism,
+THERA,Theravada Buddhism,BUDDH
+MAHAYANA,Mahayana Buddhism,BUDDH
+ZEN,Zen Buddhism,BUDDH
+SIKH,Sikhism,
+BAHAI,Bahai,
+JAIN,Jainism,
+SHINTO,Shinto,
+TAOISM,Taoism,
+CONFUC,Confucianism,
+ANIMIST,Animism,
+PAGAN,Paganism,
+DRUID,Druidism,
+RASTA,Rastafarianism,
+SCIENT,Scientology,
+ATHEIST,Atheism,
+AGNOST,Agnosticism,
+OTHER,Other Religion,
