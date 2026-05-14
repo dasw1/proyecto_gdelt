@@ -8,6 +8,8 @@ sources:
     tables:
       - name: gdelt_export
         description: "Tabla bronze con los datos crudos de GDELT export"
+      - name: CAMEO_CODE_LIST
+        description: "Trudos de GDELT cameo code"
 
   - name: seeds
     database: GDELT_BRONZE_DEV

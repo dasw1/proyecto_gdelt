@@ -9,7 +9,7 @@ Select
     avg_tone,
     actor1_id,
     actor2_id,
-    cameo_event_id,
+    cameo_code_id,
     quad_class_id,
     geo_locations_id,
     action_geo_lat as latitude,

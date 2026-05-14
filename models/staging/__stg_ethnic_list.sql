@@ -16,4 +16,4 @@ renamed as (
 
 )
 
-select * from renameddbr
+select * from renamed

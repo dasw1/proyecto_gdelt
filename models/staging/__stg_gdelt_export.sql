@@ -35,8 +35,7 @@ SELECT
 
     -- Clasificación del evento
     ISROOTEVENT::BOOLEAN                            AS is_root_event,
-    MD5(CONCAT(COALESCE(TRIM(UPPER(EVENTROOTCODE)), ''), '|', COALESCE(TRIM(SUBSTR(EVENTCODE, 3)), ''))) AS cameo_event_id,
-    EVENTCODE                                       AS event_code,
+    EVENTCODE                                       AS cameo_code_id,
     SUBSTR(EVENTCODE, 3)                            AS event_subcode,
     EVENTBASECODE                                   AS event_base_code,
     EVENTROOTCODE                                   AS event_root_code,
