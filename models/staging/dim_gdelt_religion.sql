@@ -18,11 +18,19 @@ WITH religion AS (
     FROM {{ ref('__stg_gdelt_export') }}
 )
 
-select distinct
-    COALESCE(r.religion_id, 'NS') AS religion_id,
-    COALESCE(l.religion_name, 'Not Specified') AS religion_name,
-    l.parent_id
-from religion r
-    left join {{ ref('__stg_religion_list') }} l 
-        on r.religion_id = l.religion_id
-order by l.parent_id
+SELECT DISTINCT
+    COALESCE(r.religion_id, 'NS')                           AS religion_id,
+    COALESCE(l.religion_name, 'Not Specified')              AS religion_name,
+    COALESCE(l.parent_id, l.religion_id, 'NS')             AS parent_id,
+    COALESCE(
+        CASE 
+            WHEN COALESCE(l.parent_id, l.religion_id) = 'CHR' THEN 'Christianity'
+            WHEN COALESCE(l.parent_id, l.religion_id) = 'MOS' THEN 'Islam'
+            WHEN COALESCE(l.parent_id, l.religion_id) = 'JEW' THEN 'Judaism'
+            ELSE l.religion_name
+        END,
+        'Not Specified'
+    )                                                       AS parent_name
+FROM religion r
+LEFT JOIN {{ ref('__stg_religion_list') }} l
+    ON r.religion_id = l.religion_id

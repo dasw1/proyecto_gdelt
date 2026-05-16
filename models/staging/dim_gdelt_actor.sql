@@ -1,19 +1,27 @@
-select distinct
-    actor1_id,
-    actor1_name,
-    actor1_code,
-    actor1_country_code,
-    actor1_ethnic_code,
-    actor1_known_group_code
-from {{ ref('__stg_gdelt_export') }}
+SELECT DISTINCT
+    actor1_id                               AS actor_id,
+    UPPER(TRIM(actor1_name))                AS actor_name,
+    UPPER(TRIM(actor1_code))                AS actor_code,
+    c.iso3_code                             AS country_id,
+    UPPER(TRIM(actor1_ethnic_code))         AS ethnic_id,
+    UPPER(TRIM(actor1_known_group_code))    AS known_group_id,
+    UPPER(TRIM(actor1_religion1_code))      AS religion1_id,
+    UPPER(TRIM(actor1_religion2_code))      AS religion2_id
+FROM {{ ref('__stg_gdelt_export') }} e
+LEFT JOIN {{ ref('__stg_country_list') }} c
+    ON e.actor1_country_code = c.country_code
 
-union
+UNION
 
-select distinct
+SELECT DISTINCT
     actor2_id,
-    actor2_name,
-    actor2_code,
-    actor2_country_code,
-    actor2_ethnic_code,
-    actor2_known_group_code
-from {{ ref('__stg_gdelt_export') }}
+    UPPER(TRIM(actor2_name)),
+    UPPER(TRIM(actor2_code)),
+    c.iso3_code,
+    UPPER(TRIM(actor2_ethnic_code)),
+    UPPER(TRIM(actor2_known_group_code)),
+    UPPER(TRIM(actor2_religion1_code)),
+    UPPER(TRIM(actor2_religion2_code))
+FROM {{ ref('__stg_gdelt_export') }} e
+LEFT JOIN {{ ref('__stg_country_list') }} c
+    ON e.actor2_country_code = c.country_code

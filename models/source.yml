@@ -23,3 +23,5 @@ sources:
         description: "Religiones CAMEO con jerarquía padre-hijo"
       - name: known_groups_list
         description: "Religiones CAMEO con jerarquía padre-hijo"
+      - name: actor_types_list
+        description: "Religiones CAMEO con jerarquía padre-hijo"

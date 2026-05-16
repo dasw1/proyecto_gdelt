@@ -1,0 +1,33 @@
+actor_type_id,actor_type_name,actor_type_desc
+GOV,Government,Government or state institutions
+MIL,Military,Armed forces and military organizations
+REB,Rebel,Rebel or insurgent groups
+OPP,Opposition,Political opposition groups
+COP,Police,Police and law enforcement
+JUD,Judiciary,Judicial institutions and courts
+SPY,Intelligence,Intelligence and espionage agencies
+MED,Media,Media and press organizations
+EDU,Education,Educational institutions
+BUS,Business,Business and corporate entities
+MNC,Multinational,Multinational corporations
+IGO,Intergovernmental,Intergovernmental organizations
+NGO,NGO,Non-governmental organizations
+REF,Refugee,Refugee groups
+HRI,Human Rights,Human rights organizations
+CVL,Civil,Civil society groups
+LAB,Labor,Labor unions and worker organizations
+AGR,Agriculture,Agricultural groups
+LEG,Legislative,Legislative bodies and parliaments
+ELI,Elite,Elite and leadership groups
+ENV,Environment,Environmental groups
+RAD,Religious,Religious extremist groups
+CRM,Criminal,Criminal organizations
+INS,International,International organizations
+DEV,Development,Development organizations
+HLH,Health,Health organizations
+SEP,Separatist,Separatist movements
+INT,International,International actors
+UIS,Unknown Institution,Unspecified institutional actor
+UAF,Unknown Armed Force,Unspecified armed force
+IMG,Immigrant,Immigrant groups
+SET,Settler,Settler groups

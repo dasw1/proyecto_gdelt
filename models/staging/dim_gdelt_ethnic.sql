@@ -14,3 +14,5 @@ SELECT DISTINCT
 FROM ethnic e
 LEFT JOIN {{ ref('__stg_ethnic_list') }} l
     ON e.ethnic_id = l.ethnic_id
+
+/**/

@@ -1,5 +1,6 @@
-Select 
+Select distinct
     event_id,
+    CAST(TO_CHAR(event_date, 'YYYYMMDD') AS INT) AS date_id,
     source_url,
     is_root_event,
     goldstein_scale,
@@ -12,6 +13,6 @@ Select
     cameo_code_id,
     quad_class_id,
     geo_locations_id,
-    action_geo_lat as latitude,
-    action_geo_long as longitude
+    loaded_at,
+    source_file
 from {{ ref('__stg_gdelt_export') }}

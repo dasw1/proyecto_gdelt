@@ -48,8 +48,11 @@ SELECT
     NUMARTICLES::INT                                AS num_articles,
     AVGTONE::FLOAT                                  AS avg_tone,
 
-    -- Geo acción
-    MD5(CONCAT(COALESCE(TRIM(ACTIONGEO_FULLNAME), ''), '|',COALESCE(TRIM(ACTIONGEO_COUNTRYCODE), ''), '|',COALESCE(TRIM(ACTIONGEO_TYPE::VARCHAR), ''))) AS geo_locations_id,
+    MD5(CONCAT(
+        COALESCE(TRIM(ACTIONGEO_FULLNAME), ''), '|',
+        COALESCE(c.iso3_code, TRIM(ACTIONGEO_COUNTRYCODE), ''), '|',
+        COALESCE(TRIM(ACTIONGEO_TYPE::VARCHAR), '')
+    )) AS geo_locations_id,
     ACTIONGEO_TYPE::INT                             AS action_geo_type,
     ACTIONGEO_FULLNAME                              AS action_geo_fullname,
     ACTIONGEO_COUNTRYCODE                           AS action_geo_country_code,
@@ -62,6 +65,8 @@ SELECT
     _LOADED_AT                                      AS loaded_at,
     _SOURCE_FILE                                    AS source_file
 
-FROM {{ source('bronze', 'gdelt_export') }}
+FROM {{ source('bronze', 'gdelt_export') }} e
+LEFT JOIN {{ source('seeds', 'country_list') }} c
+    ON TRIM(UPPER(e.ACTIONGEO_COUNTRYCODE)) = c.country_code
 WHERE GLOBALEVENTID IS NOT NULL
 
