@@ -4,7 +4,7 @@ SELECT
     -- Identificación
     GLOBALEVENTID::BIGINT                           AS event_id,
     TRY_TO_DATE(SQLDATE, 'YYYYMMDD')                AS event_date,
-    DATEADDED::VARCHAR                              AS date_added,
+    TRY_TO_TIMESTAMP(DATEADDED, 'YYYYMMDDHH24MISS')   AS date_added,
     SOURCEURL                                       AS source_url,
 
     -- Actor 1

@@ -10,6 +10,7 @@ SELECT DISTINCT
 FROM {{ ref('__stg_gdelt_export') }} e
 LEFT JOIN {{ ref('__stg_country_list') }} c
     ON e.actor1_country_code = c.country_code
+QUALIFY ROW_NUMBER() OVER (PARTITION BY actor1_id ORDER BY c.iso3_code) = 1
 
 UNION
 
@@ -25,3 +26,4 @@ SELECT DISTINCT
 FROM {{ ref('__stg_gdelt_export') }} e
 LEFT JOIN {{ ref('__stg_country_list') }} c
     ON e.actor2_country_code = c.country_code
+QUALIFY ROW_NUMBER() OVER (PARTITION BY actor2_id ORDER BY c.iso3_code) = 1

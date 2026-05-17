@@ -1,0 +1,101 @@
+version: 2
+
+models:
+
+  - name: fact_bilateral_relations
+    description: "Tabla de relaciones bilaterales entre países basada en eventos GDELT. Agrega métricas de cooperación y conflicto entre cada par de países."
+    columns:
+      - name: country_from
+        description: "País que inicia la acción (actor1)"
+        tests:
+          - not_null
+
+      - name: country_to
+        description: "País que recibe la acción (actor2)"
+        tests:
+          - not_null
+
+      - name: total_events
+        description: "Número total de eventos entre los dos países"
+        tests:
+          - not_null
+
+      - name: avg_goldstein
+        description: "Promedio de GoldsteinScale — impacto teórico de los eventos (-10 a +10)"
+        tests:
+          - not_null
+
+      - name: avg_tone
+        description: "Promedio del tono mediático de los artículos que cubren los eventos"
+        tests:
+          - not_null
+
+      - name: dominant_quad_class
+        description: "Tipo de interacción más frecuente entre los dos países (1-4)"
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: [1, 2, 3, 4]
+
+      - name: dominant_cameo_root
+        description: "Descripción del tipo de evento CAMEO más frecuente entre los dos países"
+
+      - name: relationship_type
+        description: "Clasificación de la relación basada en avg_goldstein"
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['Strong Cooperation', 'Mild Cooperation', 'Mild Conflict', 'Strong Conflict']
+
+      - name: narrative_vs_reality
+        description: "Detecta divergencias entre el tipo de acción real y la narrativa mediática"
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['Clear cooperation', 'Clear conflict', 'Cooperation under tension', 'Conflict with positive narrative']
+
+      - name: total_articles
+        description: "Suma total de artículos que cubren los eventos entre los dos países"
+        tests:
+          - not_null
+
+      - name: total_mentions
+        description: "Suma total de menciones de los eventos entre los dos países"
+        tests:
+          - not_null
+
+      - name: avg_articles_per_event
+        description: "Promedio de artículos por evento — indica la relevancia mediática media"
+        tests:
+          - not_null
+
+      - name: distinct_cameo_roots
+        description: "Número de tipos distintos de interacción CAMEO — indica la complejidad de la relación"
+        tests:
+          - not_null
+
+      - name: cooperation_events
+        description: "Número de eventos de cooperación (QuadClass 1 o 2)"
+        tests:
+          - not_null
+
+      - name: conflict_events
+        description: "Número de eventos de conflicto (QuadClass 3 o 4)"
+        tests:
+          - not_null
+
+      - name: cooperation_rate
+        description: "Porcentaje de eventos de cooperación sobre el total (0-100)"
+        tests:
+          - not_null
+
+      - name: goldstein_volatility
+        description: "Desviación estándar de GoldsteinScale — indica la estabilidad de la relación"
+
+      - name: high_impact_events
+        description: "Número de eventos de alto impacto (GoldsteinScale >= 7 en valor absoluto)"
+        tests:
+          - not_null
