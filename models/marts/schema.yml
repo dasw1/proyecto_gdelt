@@ -3,7 +3,7 @@ version: 2
 models:
 
   - name: fact_bilateral_relations
-    description: "Tabla de relaciones bilaterales entre países basada en eventos GDELT. Agrega métricas de cooperación y conflicto entre cada par de países."
+    description: "Tabla de relaciones bilaterales entre países basada en eventos GDELT. Agrega métricas de cooperación y conflicto entre cada par de países usando la versión más reciente de cada evento."
     columns:
       - name: country_from
         description: "País que inicia la acción (actor1)"
@@ -99,3 +99,79 @@ models:
         description: "Número de eventos de alto impacto (GoldsteinScale >= 7 en valor absoluto)"
         tests:
           - not_null
+
+  - name: fact_media_noise
+    description: "Índice de ruido mediático por país, fecha y tipo de evento CAMEO. Detecta qué eventos reciben cobertura desproporcionada respecto a su impacto geopolítico real. Usa la versión más reciente de cada evento."
+    columns:
+      - name: full_date
+        description: "Fecha completa del evento"
+        tests:
+          - not_null
+
+      - name: year
+        description: "Año del evento"
+        tests:
+          - not_null
+
+      - name: month
+        description: "Mes numérico del evento"
+        tests:
+          - not_null
+
+      - name: month_name
+        description: "Nombre del mes del evento"
+        tests:
+          - not_null
+
+      - name: country_id
+        description: "FK hacia dim_country — país donde ocurre el evento"
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_gdelt_country')
+                field: country_id
+
+      - name: country_name
+        description: "Nombre completo del país"
+        tests:
+          - not_null
+
+      - name: cameo_root_name
+        description: "Descripción de la categoría raíz CAMEO"
+        tests:
+          - not_null
+
+      - name: cameo_full_code_desc
+        description: "Descripción completa del código CAMEO de 3 o 4 dígitos"
+
+      - name: total_events
+        description: "Número total de eventos para esa combinación de país, fecha y tipo CAMEO"
+        tests:
+          - not_null
+
+      - name: avg_goldstein
+        description: "Promedio de GoldsteinScale — impacto geopolítico real (-10 a +10)"
+        tests:
+          - not_null
+
+      - name: avg_articles
+        description: "Promedio de artículos por evento — cobertura mediática"
+        tests:
+          - not_null
+
+      - name: avg_mentions
+        description: "Promedio de menciones por evento"
+        tests:
+          - not_null
+
+      - name: noise_index
+        description: "Índice de ruido — ratio entre cobertura mediática e impacto real. Valores altos indican sobrerepresentación mediática"
+
+      - name: noise_category
+        description: "Clasificación del nivel de distorsión mediática"
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['Overrepresented', 'Underrepresented', 'Noise', 'Ignored']
