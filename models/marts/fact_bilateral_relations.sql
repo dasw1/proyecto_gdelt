@@ -2,7 +2,7 @@
 
 WITH latest_events AS (
     SELECT *
-    FROM {{ ref('fact_gdelt_events') }}
+    FROM {{ ref('fact_events') }}
     QUALIFY ROW_NUMBER() OVER (
         PARTITION BY event_id
         ORDER BY date_added DESC
@@ -10,19 +10,12 @@ WITH latest_events AS (
 )
 
 SELECT
-    c1.country_name                                 AS country_from,
-    c2.country_name                                 AS country_to,
+    a1.country_name                                 AS country_from,
+    a2.country_name                                 AS country_to,
     COUNT(*)                                        AS total_events,
     AVG(f.goldstein_scale)                          AS avg_goldstein,
     AVG(f.avg_tone)                                 AS avg_tone,
-    MODE(f.quad_class_id)                           AS dominant_quad_class,
     MODE(cf.cameo_code_desc)                        AS dominant_cameo_root,
-    CASE
-        WHEN AVG(f.goldstein_scale) >= 3  THEN 'Strong Cooperation'
-        WHEN AVG(f.goldstein_scale) >= 0  THEN 'Mild Cooperation'
-        WHEN AVG(f.goldstein_scale) >= -3 THEN 'Mild Conflict'
-        ELSE 'Strong Conflict'
-    END                                             AS relationship_type,
     CASE
         WHEN AVG(f.goldstein_scale) >= 0 AND AVG(f.avg_tone) < 0 
             THEN 'Cooperation under tension'
@@ -36,7 +29,6 @@ SELECT
     SUM(f.num_articles)                             AS total_articles,
     SUM(f.num_mentions)                             AS total_mentions,
     AVG(f.num_articles)                             AS avg_articles_per_event,
-    COUNT(DISTINCT cf.cameo_root_id)                AS distinct_cameo_roots,
     SUM(CASE 
         WHEN f.quad_class_id IN (1,2) THEN 1 ELSE 0 
         END)                                        AS cooperation_events,
@@ -46,16 +38,12 @@ SELECT
     ROUND(
         SUM(CASE 
             WHEN f.quad_class_id IN (1,2) THEN 1 ELSE 0 
-            END) * 100.0 / COUNT(*), 1)             AS cooperation_rate,
-    STDDEV(f.goldstein_scale)                       AS goldstein_volatility,
-    SUM(CASE WHEN ABS(f.goldstein_scale) >= 7 THEN 1 ELSE 0 END) AS high_impact_events
+            END) * 100.0 / COUNT(*), 1)             AS cooperation_rate
 FROM latest_events f
-JOIN {{ ref('dim_gdelt_actor') }} a1        ON f.actor1_id = a1.actor_id
-JOIN {{ ref('dim_gdelt_actor') }} a2        ON f.actor2_id = a2.actor_id
-JOIN {{ ref('dim_gdelt_country') }} c1      ON a1.country_id = c1.country_id
-JOIN {{ ref('dim_gdelt_country') }} c2      ON a2.country_id = c2.country_id
-JOIN {{ ref('dim_gdelt_cameo_full') }} cf   ON f.cameo_code_id = cf.cameo_full_id
-WHERE a1.country_id IS NOT NULL
-  AND a2.country_id IS NOT NULL
-  AND a1.country_id != a2.country_id
-GROUP BY c1.country_name, c2.country_name
+JOIN {{ ref('dim_actor') }} a1        ON f.actor1_id = a1.actor_id
+JOIN {{ ref('dim_actor') }} a2        ON f.actor2_id = a2.actor_id
+JOIN {{ ref('dim_cameo') }} cf   ON f.cameo_code_id = cf.cameo_full_id
+WHERE a1.country_name IS NOT NULL
+  AND a2.country_name IS NOT NULL
+  AND a1.country_name != a2.country_name
+GROUP BY a1.country_name, a2.country_name

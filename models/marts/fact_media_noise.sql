@@ -2,7 +2,7 @@
 
 WITH latest_events AS (
     SELECT *
-    FROM {{ ref('fact_gdelt_events') }}
+    FROM {{ ref('fact_events') }}
     QUALIFY ROW_NUMBER() OVER (
         PARTITION BY event_id
         ORDER BY date_added DESC
@@ -42,11 +42,8 @@ SELECT
             'Ignored'
     END                                                         AS noise_category
 FROM latest_events f
-JOIN {{ ref('dim_gdelt_date') }} d          ON f.date_id = d.date_id
-JOIN {{ ref('dim_gdelt_geo_locations') }} g ON f.geo_locations_id = g.geo_locations_id
-JOIN {{ ref('dim_gdelt_country') }} c       ON g.country_id = c.country_id
-JOIN {{ ref('dim_gdelt_cameo_full') }} cf   ON f.cameo_code_id = cf.cameo_full_id
-JOIN {{ ref('dim_gdelt_cameo_root') }} cr   ON cf.cameo_root_id = cr.cameo_root_id
+JOIN {{ ref('dim_date') }} d          ON f.date_id = d.date_id
+JOIN {{ ref('dim_cameo') }} cf   ON f.cameo_code_id = cf.cameo_full_id
 WHERE c.country_id IS NOT NULL
 GROUP BY
     d.full_date,

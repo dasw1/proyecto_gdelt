@@ -1,0 +1,19 @@
+Select
+    event_id,
+    date_id,
+    date_added,
+    source_url,
+    is_root_event,
+    goldstein_scale,
+    num_mentions,
+    num_sources,
+    num_articles,
+    avg_tone,
+    actor1_id,
+    actor2_id,
+    cameo_code_id,
+    quad_class_id,
+    geo_locations_id,
+    loaded_at,
+    source_file
+from {{ ref('int_gdelt_events') }}
