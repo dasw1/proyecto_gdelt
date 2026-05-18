@@ -13,7 +13,6 @@ Select
     actor2_id,
     cameo_code_id,
     quad_class_id,
-    geo_locations_id,
     loaded_at,
     source_file
 from {{ ref('int_gdelt_events') }}

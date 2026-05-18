@@ -19,10 +19,9 @@ SELECT
     d.year,
     d.month,
     d.month_name,
-    c.country_id,
-    c.country_name,
-    cr.cameo_code_desc                                          AS cameo_root_name,
-    cf.cameo_code_desc                                          AS cameo_full_code_desc,
+    a.country_name,
+    cf.cameo_code_desc                                          AS cameo_root_name,
+    cf.cameo_root_desc                                          AS cameo_full_code_desc,
     COUNT(*)                                                    AS total_events,
     AVG(f.goldstein_scale)                                      AS avg_goldstein,
     AVG(f.num_articles)                                         AS avg_articles,
@@ -43,16 +42,14 @@ SELECT
     END                                                         AS noise_category
 FROM latest_events f
 JOIN {{ ref('dim_date') }} d          ON f.date_id = d.date_id
+JOIN {{ ref('dim_actor') }} a   ON f.actor1_id = a.actor_id
 JOIN {{ ref('dim_cameo') }} cf   ON f.cameo_code_id = cf.cameo_full_id
-WHERE c.country_id IS NOT NULL
+WHERE a.country_name IS NOT NULL
 GROUP BY
     d.full_date,
     d.year,
     d.month,
     d.month_name,
-    c.country_id,
-    c.country_name,
-    cr.cameo_root_id,
-    cr.cameo_code_desc,
-    cf.cameo_full_id,
+    a.country_name,
+    cf.cameo_root_desc,
     cf.cameo_code_desc

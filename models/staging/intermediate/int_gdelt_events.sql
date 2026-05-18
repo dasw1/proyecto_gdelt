@@ -1,6 +1,12 @@
-Select distinct
+{{ config(
+    materialized='incremental',
+    unique_key='event_id',
+    on_schema_change='sync_all_columns'
+) }}
+
+SELECT DISTINCT
     event_id,
-    CAST(TO_CHAR(event_date, 'YYYYMMDD') AS INT) AS date_id,
+    CAST(TO_CHAR(event_date, 'YYYYMMDD') AS INT)    AS date_id,
     date_added,
     source_url,
     is_root_event,
@@ -13,7 +19,10 @@ Select distinct
     actor2_id,
     cameo_code_id,
     quad_class_id,
-    geo_locations_id,
     loaded_at,
     source_file
-from {{ ref('__stg_gdelt_export') }}
+FROM {{ ref('__stg_gdelt_export') }}
+
+{% if is_incremental() %}
+WHERE loaded_at > (SELECT MAX(loaded_at) FROM {{ this }})
+{% endif %}

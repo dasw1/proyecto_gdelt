@@ -20,14 +20,22 @@ models:
   gdelt:
     staging:
       +materialized: view
-      +database: GDELT_SILVER_DEV
+      +database: "{{ env_var('DBT_SILVER_DB', 'GDELT_SILVER_DEV') }}"
       +schema: STAGING
+      intermediate:
+        +materialized: table
+        +database: "{{ env_var('DBT_SILVER_DB', 'GDELT_SILVER_DEV') }}"
+        +schema: INTERMEDIATE
     marts:
       +materialized: table
-      +database: GDELT_GOLD_DEV
+      +database: "{{ env_var('DBT_GOLD_DB', 'GDELT_GOLD_DEV') }}"
       +schema: MARTS
+      principal:
+        +materialized: table
+        +database: "{{ env_var('DBT_GOLD_DB', 'GDELT_GOLD_DEV') }}"
+        +schema: PRINCIPAL
 
 seeds:
   gdelt:
-    +database: GDELT_BRONZE_DEV
+    +database: "{{ env_var('DBT_BRONZE_DB', 'GDELT_BRONZE_DEV') }}"
     +schema: SEEDS

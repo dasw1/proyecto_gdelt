@@ -9,11 +9,6 @@ WITH countries AS (
     FROM {{ ref('__stg_gdelt_export') }}
     WHERE actor2_country_code IS NOT NULL AND actor2_country_code != ''
 
-    UNION
-
-    SELECT DISTINCT action_geo_country_code
-    FROM {{ ref('__stg_gdelt_export') }}
-    WHERE action_geo_country_code IS NOT NULL AND action_geo_country_code != ''
 )
 
 SELECT DISTINCT
