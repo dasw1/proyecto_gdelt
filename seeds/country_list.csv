@@ -1,0 +1,393 @@
+country_code,iso3_code,fips_code,country_name,country_type
+AFG,AFG,AF,Afghanistan,country
+AF,AFG,AF,Afghanistan,country
+ALB,ALB,AL,Albania,country
+AL,ALB,AL,Albania,country
+DZA,DZA,AG,Algeria,country
+AG,DZA,AG,Algeria,country
+AND,AND,AN,Andorra,country
+AN,AND,AN,Andorra,country
+AGO,AGO,AO,Angola,country
+AO,AGO,AO,Angola,country
+AIA,AIA,AV,Anguilla,territory
+AV,AIA,AV,Anguilla,territory
+ATG,ATG,AC,Antigua and Barbuda,country
+AC,ATG,AC,Antigua and Barbuda,country
+ARG,ARG,AR,Argentina,country
+AR,ARG,AR,Argentina,country
+ARM,ARM,AM,Armenia,country
+AM,ARM,AM,Armenia,country
+ABW,ABW,AW,Aruba,territory
+AUS,AUS,AS,Australia,country
+AS,AUS,AS,Australia,country
+AUT,AUT,AU,Austria,country
+AU,AUT,AU,Austria,country
+AZE,AZE,AJ,Azerbaijan,country
+AJ,AZE,AJ,Azerbaijan,country
+BHS,BHS,BF,Bahamas,country
+BF,BHS,BF,Bahamas,country
+BHR,BHR,BH,Bahrain,country
+BH,BHR,BH,Bahrain,country
+BGD,BGD,BD,Bangladesh,country
+BD,BGD,BD,Bangladesh,country
+BRB,BRB,BB,Barbados,country
+BB,BRB,BB,Barbados,country
+BLR,BLR,BO,Belarus,country
+BO,BLR,BO,Belarus,country
+BEL,BEL,BE,Belgium,country
+BE,BEL,BE,Belgium,country
+BLZ,BLZ,BH,Belize,country
+BEN,BEN,BN,Benin,country
+BN,BEN,BN,Benin,country
+BTN,BTN,BT,Bhutan,country
+BT,BTN,BT,Bhutan,country
+BOL,BOL,BL,Bolivia,country
+BL,BOL,BL,Bolivia,country
+BIH,BIH,BK,Bosnia and Herzegovina,country
+BK,BIH,BK,Bosnia and Herzegovina,country
+BWA,BWA,BC,Botswana,country
+BC,BWA,BC,Botswana,country
+BRA,BRA,BR,Brazil,country
+BR,BRA,BR,Brazil,country
+BRN,BRN,BX,Brunei,country
+BX,BRN,BX,Brunei,country
+BGR,BGR,BU,Bulgaria,country
+BU,BGR,BU,Bulgaria,country
+BFA,BFA,UV,Burkina Faso,country
+UV,BFA,UV,Burkina Faso,country
+BDI,BDI,BY,Burundi,country
+BY,BDI,BY,Burundi,country
+KHM,KHM,CB,Cambodia,country
+CB,KHM,CB,Cambodia,country
+CMR,CMR,CM,Cameroon,country
+CM,CMR,CM,Cameroon,country
+CAN,CAN,CA,Canada,country
+CA,CAN,CA,Canada,country
+CPV,CPV,CV,Cape Verde,country
+CV,CPV,CV,Cape Verde,country
+CYM,CYM,CJ,Cayman Islands,territory
+CJ,CYM,CJ,Cayman Islands,territory
+CAF,CAF,CT,Central African Republic,country
+CT,CAF,CT,Central African Republic,country
+TCD,TCD,CD,Chad,country
+CD,TCD,CD,Chad,country
+CIV,CIV,IV,Ivory Coast,country
+IV,CIV,IV,Ivory Coast,country
+CHN,CHN,CH,China,country
+CH,CHN,CH,China,country
+COL,COL,CO,Colombia,country
+CO,COL,CO,Colombia,country
+COM,COM,CN,Comoros,country
+CN,COM,CN,Comoros,country
+COG,COG,CF,Republic of the Congo,country
+CF,COG,CF,Republic of the Congo,country
+COD,COD,CG,Democratic Republic of the Congo,country
+CG,COD,CG,Democratic Republic of the Congo,country
+CRI,CRI,CS,Costa Rica,country
+CS,CRI,CS,Costa Rica,country
+CUB,CUB,CU,Cuba,country
+CU,CUB,CU,Cuba,country
+CYP,CYP,CY,Cyprus,country
+CY,CYP,CY,Cyprus,country
+CZE,CZE,EZ,Czech Republic,country
+EZ,CZE,EZ,Czech Republic,country
+DNK,DNK,DA,Denmark,country
+DA,DNK,DA,Denmark,country
+DJI,DJI,DJ,Djibouti,country
+DJ,DJI,DJ,Djibouti,country
+DMA,DMA,DO,Dominica,country
+DO,DMA,DO,Dominica,country
+DOM,DOM,DR,Dominican Republic,country
+DR,DOM,DR,Dominican Republic,country
+ECU,ECU,EC,Ecuador,country
+EC,ECU,EC,Ecuador,country
+EGY,EGY,EG,Egypt,country
+EG,EGY,EG,Egypt,country
+SLV,SLV,ES,El Salvador,country
+ES,SLV,ES,El Salvador,country
+GNQ,GNQ,EK,Equatorial Guinea,country
+EK,GNQ,EK,Equatorial Guinea,country
+ERI,ERI,ER,Eritrea,country
+ER,ERI,ER,Eritrea,country
+EST,EST,EN,Estonia,country
+EN,EST,EN,Estonia,country
+ETH,ETH,ET,Ethiopia,country
+ET,ETH,ET,Ethiopia,country
+FJI,FJI,FJ,Fiji,country
+FJ,FJI,FJ,Fiji,country
+FIN,FIN,FI,Finland,country
+FI,FIN,FI,Finland,country
+FRA,FRA,FR,France,country
+FR,FRA,FR,France,country
+GAB,GAB,GB,Gabon,country
+GB,GAB,GB,Gabon,country
+GMB,GMB,GM,Gambia,country
+GM,GMB,GM,Gambia,country
+PSE,PSE,GZ,Palestine,territory
+GZ,PSE,GZ,Palestine,territory
+GHA,GHA,GH,Ghana,country
+GH,GHA,GH,Ghana,country
+GRC,GRC,GR,Greece,country
+GR,GRC,GR,Greece,country
+GEO,GEO,GJ,Georgia,country
+GJ,GEO,GJ,Georgia,country
+GTM,GTM,GT,Guatemala,country
+GT,GTM,GT,Guatemala,country
+GIN,GIN,GV,Guinea,country
+GV,GIN,GV,Guinea,country
+GNB,GNB,PU,Guinea-Bissau,country
+PU,GNB,PU,Guinea-Bissau,country
+GUY,GUY,GY,Guyana,country
+GY,GUY,GY,Guyana,country
+HTI,HTI,HA,Haiti,country
+HA,HTI,HA,Haiti,country
+HND,HND,HO,Honduras,country
+HO,HND,HO,Honduras,country
+HKG,HKG,HK,Hong Kong,territory
+HK,HKG,HK,Hong Kong,territory
+HUN,HUN,HU,Hungary,country
+HU,HUN,HU,Hungary,country
+ISL,ISL,IC,Iceland,country
+IC,ISL,IC,Iceland,country
+IND,IND,IN,India,country
+IN,IND,IN,India,country
+IDN,IDN,ID,Indonesia,country
+ID,IDN,ID,Indonesia,country
+IRN,IRN,IR,Iran,country
+IR,IRN,IR,Iran,country
+IRQ,IRQ,IZ,Iraq,country
+IZ,IRQ,IZ,Iraq,country
+IRL,IRL,EI,Ireland,country
+EI,IRL,EI,Ireland,country
+ISR,ISR,IS,Israel,country
+IS,ISR,IS,Israel,country
+ITA,ITA,IT,Italy,country
+IT,ITA,IT,Italy,country
+JAM,JAM,JM,Jamaica,country
+JM,JAM,JM,Jamaica,country
+JPN,JPN,JA,Japan,country
+JA,JPN,JA,Japan,country
+JOR,JOR,JO,Jordan,country
+JO,JOR,JO,Jordan,country
+KAZ,KAZ,KZ,Kazakhstan,country
+KZ,KAZ,KZ,Kazakhstan,country
+KEN,KEN,KE,Kenya,country
+KE,KEN,KE,Kenya,country
+KIR,KIR,KR,Kiribati,country
+KR,KIR,KR,Kiribati,country
+PRK,PRK,KN,North Korea,country
+KN,PRK,KN,North Korea,country
+KOR,KOR,KS,South Korea,country
+KS,KOR,KS,South Korea,country
+KWT,KWT,KU,Kuwait,country
+KU,KWT,KU,Kuwait,country
+KGZ,KGZ,KG,Kyrgyzstan,country
+KG,KGZ,KG,Kyrgyzstan,country
+LAO,LAO,LA,Laos,country
+LA,LAO,LA,Laos,country
+LVA,LVA,LG,Latvia,country
+LG,LVA,LG,Latvia,country
+LBN,LBN,LE,Lebanon,country
+LE,LBN,LE,Lebanon,country
+LSO,LSO,LT,Lesotho,country
+LT,LSO,LT,Lesotho,country
+LBR,LBR,LI,Liberia,country
+LI,LBR,LI,Liberia,country
+LBY,LBY,LY,Libya,country
+LY,LBY,LY,Libya,country
+LIE,LIE,LS,Liechtenstein,country
+LS,LIE,LS,Liechtenstein,country
+LTU,LTU,LH,Lithuania,country
+LH,LTU,LH,Lithuania,country
+LUX,LUX,LU,Luxembourg,country
+LU,LUX,LU,Luxembourg,country
+MAC,MAC,MO,Macau,territory
+MO,MAC,MO,Macau,territory
+MKD,MKD,MK,North Macedonia,country
+MK,MKD,MK,North Macedonia,country
+MDG,MDG,MG,Madagascar,country
+MWI,MWI,MI,Malawi,country
+MI,MWI,MI,Malawi,country
+MYS,MYS,MY,Malaysia,country
+MY,MYS,MY,Malaysia,country
+MDV,MDV,MV,Maldives,country
+MV,MDV,MV,Maldives,country
+MLI,MLI,ML,Mali,country
+ML,MLI,ML,Mali,country
+MLT,MLT,MT,Malta,country
+MT,MLT,MT,Malta,country
+MHL,MHL,MH,Marshall Islands,country
+MH,MHL,MH,Marshall Islands,country
+MRT,MRT,MR,Mauritania,country
+MR,MRT,MR,Mauritania,country
+MUS,MUS,MU,Mauritius,country
+MU,MUS,MU,Mauritius,country
+MEX,MEX,MX,Mexico,country
+MX,MEX,MX,Mexico,country
+FSM,FSM,FM,Micronesia,country
+FM,FSM,FM,Micronesia,country
+MDA,MDA,MD,Moldova,country
+MD,MDA,MD,Moldova,country
+MCO,MCO,MN,Monaco,country
+MN,MCO,MN,Monaco,country
+MNG,MNG,MG,Mongolia,country
+MOZ,MOZ,MZ,Mozambique,country
+MZ,MOZ,MZ,Mozambique,country
+NAM,NAM,WA,Namibia,country
+WA,NAM,WA,Namibia,country
+NPL,NPL,NP,Nepal,country
+NP,NPL,NP,Nepal,country
+NLD,NLD,NL,Netherlands,country
+NL,NLD,NL,Netherlands,country
+NZL,NZL,NZ,New Zealand,country
+NZ,NZL,NZ,New Zealand,country
+NIC,NIC,NU,Nicaragua,country
+NU,NIC,NU,Nicaragua,country
+NER,NER,NG,Niger,country
+NG,NER,NG,Niger,country
+NGA,NGA,NI,Nigeria,country
+NI,NGA,NI,Nigeria,country
+NOR,NOR,NO,Norway,country
+NO,NOR,NO,Norway,country
+OMN,OMN,MU,Oman,country
+PAK,PAK,PK,Pakistan,country
+PK,PAK,PK,Pakistan,country
+PLW,PLW,PS,Palau,country
+PS,PLW,PS,Palau,country
+PAN,PAN,PM,Panama,country
+PM,PAN,PM,Panama,country
+PNG,PNG,PP,Papua New Guinea,country
+PP,PNG,PP,Papua New Guinea,country
+PRY,PRY,PA,Paraguay,country
+PA,PRY,PA,Paraguay,country
+PER,PER,PE,Peru,country
+PE,PER,PE,Peru,country
+PHL,PHL,RP,Philippines,country
+RP,PHL,RP,Philippines,country
+POL,POL,PL,Poland,country
+PL,POL,PL,Poland,country
+PRT,PRT,PO,Portugal,country
+PO,PRT,PO,Portugal,country
+QAT,QAT,QA,Qatar,country
+QA,QAT,QA,Qatar,country
+ROU,ROU,RO,Romania,country
+RO,ROU,RO,Romania,country
+RUS,RUS,RS,Russia,country
+RS,RUS,RS,Russia,country
+RWA,RWA,RW,Rwanda,country
+RW,RWA,RW,Rwanda,country
+KNA,KNA,SC,Saint Kitts and Nevis,country
+SC,KNA,SC,Saint Kitts and Nevis,country
+LCA,LCA,ST,Saint Lucia,country
+VCT,VCT,VC,Saint Vincent and the Grenadines,country
+VC,VCT,VC,Saint Vincent and the Grenadines,country
+WSM,WSM,WS,Samoa,country
+WS,WSM,WS,Samoa,country
+SMR,SMR,SM,San Marino,country
+SM,SMR,SM,San Marino,country
+STP,STP,ST,Sao Tome and Principe,country
+SAU,SAU,SA,Saudi Arabia,country
+SA,SAU,SA,Saudi Arabia,country
+SEN,SEN,SN,Senegal,country
+SRB,SRB,RI,Serbia,country
+RI,SRB,RI,Serbia,country
+SYC,SYC,SE,Seychelles,country
+SE,SYC,SE,Seychelles,country
+SLE,SLE,SL,Sierra Leone,country
+SL,SLE,SL,Sierra Leone,country
+SGP,SGP,SG,Singapore,country
+SG,SGP,SG,Singapore,country
+SVK,SVK,LO,Slovakia,country
+LO,SVK,LO,Slovakia,country
+SVN,SVN,SI,Slovenia,country
+SI,SVN,SI,Slovenia,country
+SLB,SLB,BP,Solomon Islands,country
+BP,SLB,BP,Solomon Islands,country
+SOM,SOM,SO,Somalia,country
+SO,SOM,SO,Somalia,country
+ZAF,ZAF,SF,South Africa,country
+SF,ZAF,SF,South Africa,country
+SSD,SSD,OD,South Sudan,country
+OD,SSD,OD,South Sudan,country
+ESP,ESP,SP,Spain,country
+SP,ESP,SP,Spain,country
+LKA,LKA,CE,Sri Lanka,country
+CE,LKA,CE,Sri Lanka,country
+SDN,SDN,SU,Sudan,country
+SU,SDN,SU,Sudan,country
+SUR,SUR,NS,Suriname,country
+NS,SUR,NS,Suriname,country
+SWZ,SWZ,WZ,Eswatini,country
+WZ,SWZ,WZ,Eswatini,country
+SWE,SWE,SW,Sweden,country
+SW,SWE,SW,Sweden,country
+CHE,CHE,SZ,Switzerland,country
+SZ,CHE,SZ,Switzerland,country
+SYR,SYR,SY,Syria,country
+SY,SYR,SY,Syria,country
+TWN,TWN,TW,Taiwan,territory
+TW,TWN,TW,Taiwan,territory
+TJK,TJK,TI,Tajikistan,country
+TI,TJK,TI,Tajikistan,country
+TZA,TZA,TZ,Tanzania,country
+TZ,TZA,TZ,Tanzania,country
+THA,THA,TH,Thailand,country
+TH,THA,TH,Thailand,country
+TLS,TLS,TT,Timor-Leste,country
+TON,TON,TN,Tonga,country
+TN,TON,TN,Tonga,country
+TTO,TTO,TD,Trinidad and Tobago,country
+TD,TTO,TD,Trinidad and Tobago,country
+TUN,TUN,TS,Tunisia,country
+TS,TUN,TS,Tunisia,country
+TUR,TUR,TU,Turkey,country
+TU,TUR,TU,Turkey,country
+TKM,TKM,TX,Turkmenistan,country
+TX,TKM,TX,Turkmenistan,country
+TUV,TUV,TV,Tuvalu,country
+TV,TUV,TV,Tuvalu,country
+UGA,UGA,UG,Uganda,country
+UG,UGA,UG,Uganda,country
+UKR,UKR,UP,Ukraine,country
+UP,UKR,UP,Ukraine,country
+ARE,ARE,AE,United Arab Emirates,country
+AE,ARE,AE,United Arab Emirates,country
+GBR,GBR,UK,United Kingdom,country
+UK,GBR,UK,United Kingdom,country
+USA,USA,US,United States,country
+US,USA,US,United States,country
+URY,URY,UY,Uruguay,country
+UY,URY,UY,Uruguay,country
+UZB,UZB,UZ,Uzbekistan,country
+UZ,UZB,UZ,Uzbekistan,country
+VAT,VAT,VT,Vatican City,country
+VT,VAT,VT,Vatican City,country
+VEN,VEN,VE,Venezuela,country
+VE,VEN,VE,Venezuela,country
+VNM,VNM,VM,Vietnam,country
+VM,VNM,VM,Vietnam,country
+VUT,VUT,NH,Vanuatu,country
+NH,VUT,NH,Vanuatu,country
+YEM,YEM,YM,Yemen,country
+YM,YEM,YM,Yemen,country
+ZMB,ZMB,ZM,Zambia,country
+ZM,ZMB,ZM,Zambia,country
+ZWE,ZWE,ZI,Zimbabwe,country
+ZI,ZWE,ZI,Zimbabwe,country
+BMU,BMU,BM,Bermuda,territory
+BM,BMU,BM,Bermuda,territory
+MNE,MNE,MJ,Montenegro,country
+MJ,MNE,MJ,Montenegro,country
+XKX,XKX,KV,Kosovo,territory
+KV,XKX,KV,Kosovo,territory
+PGS,PSE,PG,Palestinian Territories,territory
+EUR,EUR,EUR,Europe,region
+AFR,AFR,AFR,Africa,region
+ASA,ASA,ASA,Asia,region
+SEA,SEA,SEA,Southeast Asia,region
+MEA,MEA,MEA,Middle East,region
+WAF,WAF,WAF,West Africa,region
+EAF,EAF,EAF,East Africa,region
+CAS,CAS,CAS,Central Asia,region
+SAS,SAS,SAS,South Asia,region
+CRB,CRB,CRB,Caribbean,region

@@ -1,0 +1,27 @@
+# models/staging/sources.yml
+version: 2
+
+sources:
+  - name: bronze
+    database: GDELT_BRONZE_DEV
+    schema: STAGING
+    tables:
+      - name: gdelt_export
+        description: "Tabla bronze con los datos crudos de GDELT export"
+      - name: CAMEO_CODE_LIST
+        description: "Trudos de GDELT cameo code"
+
+  - name: seeds
+    database: GDELT_BRONZE_DEV
+    schema: DBT_GDELT_SEEDS
+    tables:
+      - name: country_list
+        description: "Mapeo de códigos de país FIPS y ISO3 con nombre completo"
+      - name: religion_list
+        description: "Religiones CAMEO con jerarquía padre-hijo"
+      - name: ethnic_list
+        description: "Religiones CAMEO con jerarquía padre-hijo"
+      - name: known_groups_list
+        description: "Religiones CAMEO con jerarquía padre-hijo"
+      - name: actor_types_list
+        description: "Religiones CAMEO con jerarquía padre-hijo"
