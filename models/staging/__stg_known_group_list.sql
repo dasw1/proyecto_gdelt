@@ -9,8 +9,8 @@ source as (
 renamed as (
 
     select
-        known_group_id,
-        known_group_name
+        trim(upper(known_group_id::varchar(3))),
+        initcap(trim(known_group_name))
 
     from source
 
