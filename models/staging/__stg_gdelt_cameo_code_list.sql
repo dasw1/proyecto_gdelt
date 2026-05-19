@@ -9,8 +9,8 @@ source as (
 renamed as (
 
     select
-        cameo_code_list::varchar(4) as cameo_code_full_id,
-        cameo_code_desc
+        trim(cameo_code_list)::varchar(4) as cameo_code_full_id,
+        initcap(trim(cameo_code_desc))
 
     from source
     order by cameo_code_full_id

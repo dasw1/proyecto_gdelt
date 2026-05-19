@@ -9,10 +9,10 @@ source as (
 renamed as (
 
     select
-        country_code,
-        fips_code,
-        iso3_code,
-        country_name,
+        trim(upper(country_code)),
+        trim(upper(fips_code)),
+        trim(upper(iso3_code)),
+        initcap(trim(country_name)),
         CASE country_type
             WHEN 'region'    THEN 1
             WHEN 'territory' THEN 2

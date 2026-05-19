@@ -9,8 +9,8 @@ source as (
 renamed as (
 
     select
-        ethnic_id,
-        ethnic_name
+        trim(upper(ethnic_id)),
+        upper(trim(ethnic_name))
 
     from source
 
