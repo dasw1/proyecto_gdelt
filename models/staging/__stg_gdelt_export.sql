@@ -1,6 +1,8 @@
-{% if is_incremental() %}
-WHERE loaded_at > (SELECT MAX(loaded_at) FROM {{ this }})
-{% endif %}
+{{ config(
+    materialized='incremental',
+    unique_key='event_id',
+    on_schema_change='sync_all_columns'
+) }}
 
 SELECT
     -- Identificación
