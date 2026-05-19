@@ -4,9 +4,9 @@ WITH source AS (
 
 renamed AS (
     SELECT
-        upper(trim(actor_type_id))::varchar(3),
-        initcap(trim(actor_type_name)),
-        initcap(trim(actor_type_desc))
+        upper(trim(actor_type_id))::varchar(3) as actor_type_id,
+        initcap(trim(actor_type_name)) as actor_type_name,
+        initcap(trim(actor_type_desc)) as actor_type_desc
     FROM source
 )
 
