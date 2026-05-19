@@ -5,7 +5,7 @@ WITH latest_events AS (
     FROM {{ ref('fact_events') }}
     QUALIFY ROW_NUMBER() OVER (
         PARTITION BY event_id
-        ORDER BY date_added DESC
+        ORDER BY loaded_at DESC
     ) = 1
 ),
 
@@ -15,17 +15,13 @@ global_avg AS (
 )
 
 SELECT
-    d.full_date,
-    d.year,
-    d.month,
-    d.month_name,
-    a.country_name,
-    cf.cameo_code_desc                                          AS cameo_root_name,
-    cf.cameo_root_desc                                          AS cameo_full_code_desc,
+    d.date_id,
+    a.actor_id,
+    cf.cameo_full_id,
     COUNT(*)                                                    AS total_events,
-    AVG(f.goldstein_scale)                                      AS avg_goldstein,
-    AVG(f.num_articles)                                         AS avg_articles,
-    AVG(f.num_mentions)                                         AS avg_mentions,
+    COALESCE(AVG(f.goldstein_scale), 0)                                      AS avg_goldstein,
+    COALESCE(AVG(f.num_articles), 0)                                         AS avg_articles,
+    COALESCE(AVG(f.num_mentions), 0)                                         AS avg_mentions,
     ROUND(AVG(f.num_articles) / NULLIF(ABS(AVG(f.goldstein_scale)), 0), 2) AS noise_index,
     CASE
         WHEN AVG(f.goldstein_scale) >= 0 
@@ -46,10 +42,6 @@ JOIN {{ ref('dim_actor') }} a   ON f.actor1_id = a.actor_id
 JOIN {{ ref('dim_cameo') }} cf   ON f.cameo_code_id = cf.cameo_full_id
 WHERE a.country_name IS NOT NULL
 GROUP BY
-    d.full_date,
-    d.year,
-    d.month,
-    d.month_name,
-    a.country_name,
-    cf.cameo_root_desc,
-    cf.cameo_code_desc
+    d.date_id,
+    a.actor_id,
+    cf.cameo_full_id

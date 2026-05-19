@@ -1,7 +1,6 @@
 Select
     event_id,
     date_id,
-    date_added,
     source_url,
     is_root_event,
     goldstein_scale,

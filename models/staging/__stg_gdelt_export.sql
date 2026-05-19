@@ -1,10 +1,7 @@
-{{ config(materialized='view') }}
-
 SELECT
     -- Identificación
     GLOBALEVENTID::BIGINT                           AS event_id,
     TRY_TO_DATE(SQLDATE, 'YYYYMMDD')                AS event_date,
-    TRY_TO_TIMESTAMP(DATEADDED, 'YYYYMMDDHH24MISS')   AS date_added,
     SOURCEURL                                       AS source_url,
 
     -- Actor 1
@@ -69,4 +66,3 @@ FROM {{ source('bronze', 'gdelt_export') }} e
 LEFT JOIN {{ source('seeds', 'country_list') }} c
     ON TRIM(UPPER(e.ACTIONGEO_COUNTRYCODE)) = c.country_code
 WHERE GLOBALEVENTID IS NOT NULL
-
