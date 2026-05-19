@@ -56,20 +56,6 @@ models:
         tests:
           - not_null
 
-      - name: cooperation_events
-        description: "Número de eventos de cooperación (QuadClass 1 o 2)"
-        tests:
-          - not_null
-
-      - name: conflict_events
-        description: "Número de eventos de conflicto (QuadClass 3 o 4)"
-        tests:
-          - not_null
-
-      - name: cooperation_rate
-        description: "Porcentaje de eventos de cooperación sobre el total (0-100)"
-        tests:
-          - not_null
 
   - name: fact_media_noise
     description: "Índice de ruido mediático por país, fecha y tipo de evento CAMEO. Detecta qué eventos reciben cobertura desproporcionada respecto a su impacto geopolítico real. Usa la versión más reciente de cada evento."

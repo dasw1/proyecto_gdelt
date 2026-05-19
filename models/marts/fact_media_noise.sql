@@ -5,7 +5,7 @@ WITH latest_events AS (
     FROM {{ ref('fact_events') }}
     QUALIFY ROW_NUMBER() OVER (
         PARTITION BY event_id
-        ORDER BY date_added DESC
+        ORDER BY loaded_at DESC
     ) = 1
 ),
 

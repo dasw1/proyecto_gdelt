@@ -1,4 +1,3 @@
-{{ config(materialized='table') }}
 
 SELECT DISTINCT
     CAST(TO_CHAR(event_date, 'YYYYMMDD') AS INT)    AS date_id,
