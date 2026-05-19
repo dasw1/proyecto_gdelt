@@ -13,9 +13,9 @@ SELECT
     a1.actor_id                             AS country_from,
     a2.actor_id                             AS country_to,
     COUNT(*)                                    AS total_events,
-    AVG(f.goldstein_scale)                      AS avg_goldstein,
-    AVG(f.avg_tone)                             AS avg_tone,
-    AVG(f.goldstein_scale)+AVG(f.avg_tone)      AS narrative_vs_reality_value,
+    COALESCE(AVG(f.goldstein_scale), 0)         AS avg_goldstein,
+    COALESCE(AVG(f.avg_tone), 0)                AS avg_tone,
+    COALESCE(AVG(f.goldstein_scale), 0) + COALESCE(AVG(f.avg_tone), 0) AS narrative_vs_reality_value,
     MODE(cf.cameo_code_desc)                    AS dominant_cameo_root,
     CASE
         WHEN AVG(f.goldstein_scale) >= 0 AND AVG(f.avg_tone) < 0 
