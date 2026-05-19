@@ -1,3 +1,8 @@
+{{ config(
+    materialized='incremental',
+    unique_key='event_id',
+    on_schema_change='sync_all_columns'
+) }}
 
 SELECT DISTINCT
     event_id,
@@ -17,3 +22,6 @@ SELECT DISTINCT
     source_file
 FROM {{ ref('__stg_gdelt_export') }}
 
+{% if is_incremental() %}
+WHERE loaded_at > (SELECT MAX(loaded_at) FROM {{ this }})
+{% endif %}

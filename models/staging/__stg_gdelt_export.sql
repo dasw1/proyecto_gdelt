@@ -1,9 +1,3 @@
-{{ config(
-    materialized='incremental',
-    unique_key='event_id',
-    on_schema_change='sync_all_columns'
-) }}
-
 SELECT
     -- Identificación
     GLOBALEVENTID::BIGINT                           AS event_id,
@@ -72,7 +66,3 @@ FROM {{ source('bronze', 'gdelt_export') }} e
 LEFT JOIN {{ source('seeds', 'country_list') }} c
     ON TRIM(UPPER(e.ACTIONGEO_COUNTRYCODE)) = c.country_code
 WHERE GLOBALEVENTID IS NOT NULL
-
-{% if is_incremental() %}
-WHERE loaded_at > (SELECT MAX(loaded_at) FROM {{ this }})
-{% endif %}

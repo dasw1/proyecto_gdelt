@@ -3,15 +3,15 @@ version: 2
 models:
 
   - name: fact_bilateral_relations
-    description: "Relaciones bilaterales entre países basada en eventos GDELT. Usa la versión más reciente de cada evento. Agrega métricas de cooperación y conflicto entre cada par de países."
+    description: "Relaciones bilaterales entre países basada en eventos GDELT. Usa la versión más reciente de cada evento. Agrega métricas de cooperación y conflicto entre cada par de países. Normalizado — usa country_id como FK hacia dim_actor."
     columns:
       - name: country_from
-        description: "País que inicia la acción (actor1)"
+        description: "FK hacia dim_actor — país que inicia la acción (actor1)"
         tests:
           - not_null
 
       - name: country_to
-        description: "País que recibe la acción (actor2)"
+        description: "FK hacia dim_actor — país que recibe la acción (actor2)"
         tests:
           - not_null
 
@@ -27,6 +27,11 @@ models:
 
       - name: avg_tone
         description: "Promedio del tono mediático de los artículos que cubren los eventos"
+        tests:
+          - not_null
+
+      - name: narrative_vs_reality_value
+        description: "Valor numérico combinado de avg_goldstein + avg_tone — útil para ordenar relaciones"
         tests:
           - not_null
 
@@ -56,45 +61,38 @@ models:
         tests:
           - not_null
 
-
   - name: fact_media_noise
-    description: "Índice de ruido mediático por país, fecha y tipo de evento CAMEO. Detecta qué eventos reciben cobertura desproporcionada respecto a su impacto geopolítico real. Usa la versión más reciente de cada evento."
+    description: "Índice de ruido mediático por actor, fecha y código CAMEO. Normalizado — usa actor_id y cameo_full_id como FKs. Detecta qué eventos reciben cobertura desproporcionada respecto a su impacto geopolítico real."
     columns:
-      - name: full_date
-        description: "Fecha completa del evento"
+      - name: date_id
+        description: "FK hacia dim_date"
         tests:
           - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_date')
+                field: date_id
 
-      - name: year
-        description: "Año del evento"
+      - name: actor_id
+        description: "FK hacia dim_actor"
         tests:
           - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_actor')
+                field: actor_id
 
-      - name: month
-        description: "Mes numérico del evento"
+      - name: cameo_full_id
+        description: "FK hacia dim_cameo"
         tests:
           - not_null
-
-      - name: month_name
-        description: "Nombre del mes del evento"
-        tests:
-          - not_null
-
-      - name: country_name
-        description: "Nombre completo del país donde ocurre el evento"
-        tests:
-          - not_null
-
-      - name: cameo_root_name
-        description: "Descripción del código CAMEO completo"
-        tests:
-          - not_null
-
-      - name: cameo_full_code_desc
-        description: "Descripción de la categoría raíz CAMEO"
+          - relationships:
+              arguments:
+                to: ref('dim_cameo')
+                field: cameo_full_id
 
       - name: total_events
-        description: "Número total de eventos para esa combinación de país, fecha y tipo CAMEO"
+        description: "Número total de eventos para esa combinación de actor, fecha y tipo CAMEO"
         tests:
           - not_null
 
@@ -114,7 +112,7 @@ models:
           - not_null
 
       - name: noise_index
-        description: "Índice de ruido — ratio entre cobertura mediática e impacto real. Valores altos indican sobrerepresentación mediática"
+        description: "Índice de ruido — ratio entre cobertura mediática e impacto real"
 
       - name: noise_category
         description: "Clasificación del nivel de distorsión mediática"
