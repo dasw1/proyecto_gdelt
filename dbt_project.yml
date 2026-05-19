@@ -23,7 +23,7 @@ models:
       +database: "{{ env_var('DBT_SILVER_DB', 'GDELT_SILVER_DEV') }}"
       +schema: STAGING
       intermediate:
-        +materialized: table
+        +materialized: view
         +database: "{{ env_var('DBT_SILVER_DB', 'GDELT_SILVER_DEV') }}"
         +schema: INTERMEDIATE
     marts:

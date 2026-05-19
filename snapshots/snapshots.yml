@@ -1,0 +1,75 @@
+version: 2
+
+snapshots:
+  - name: snap_bilateral_relations
+    description: "Historial de cambios en las relaciones bilaterales entre países. Cada fila representa una versión de la relación entre dos países — cuando cambia narrative_vs_reality, avg_goldstein u otras métricas clave se guarda el estado anterior y se crea uno nuevo."
+    columns:
+      - name: country_from
+        description: "País que inicia la acción"
+        tests:
+          - not_null
+
+      - name: country_to
+        description: "País que recibe la acción"
+        tests:
+          - not_null
+
+      - name: avg_goldstein
+        description: "Promedio de GoldsteinScale en el momento de la snapshot"
+        tests:
+          - not_null
+
+      - name: avg_tone
+        description: "Promedio del tono mediático en el momento de la snapshot"
+        tests:
+          - not_null
+
+      - name: narrative_vs_reality
+        description: "Clasificación de la relación en el momento de la snapshot"
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['Clear cooperation', 'Clear conflict', 'Cooperation under tension', 'Conflict with positive narrative']
+
+      - name: cooperation_rate
+        description: "Porcentaje de cooperación en el momento de la snapshot"
+        tests:
+          - not_null
+
+      - name: dominant_cameo_root
+        description: "Tipo de evento más frecuente en el momento de la snapshot"
+
+      - name: total_events
+        description: "Total de eventos en el momento de la snapshot"
+        tests:
+          - not_null
+
+      - name: cooperation_events
+        description: "Eventos de cooperación en el momento de la snapshot"
+        tests:
+          - not_null
+
+      - name: conflict_events
+        description: "Eventos de conflicto en el momento de la snapshot"
+        tests:
+          - not_null
+
+      - name: dbt_scd_id
+        description: "ID único de cada versión de la relación generado por dbt"
+        tests:
+          - unique
+          - not_null
+
+      - name: dbt_valid_from
+        description: "Timestamp desde el que esta versión es válida"
+        tests:
+          - not_null
+
+      - name: dbt_valid_to
+        description: "Timestamp hasta el que esta versión fue válida — NULL indica la versión actual"
+
+      - name: dbt_updated_at
+        description: "Timestamp de la última actualización de esta fila"
+        tests:
+          - not_null
