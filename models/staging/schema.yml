@@ -2,109 +2,8 @@ version: 2
 
 models:
 
-  # =============================================================================
-  # DIMENSIONES SIN DEPENDENCIAS
-  # =============================================================================
-
-  - name: dim_gdelt_country_type
-    description: "Tipos de país: país soberano, territorio dependiente o región geográfica"
-    columns:
-      - name: country_type_id
-        description: "Identificador del tipo de país (1=región, 2=territorio, 3=país)"
-        tests:
-          - unique
-          - not_null
-      - name: country_type_name
-        description: "Nombre del tipo de país"
-        tests:
-          - not_null
-          - accepted_values:
-              arguments:
-                values: ['Region', 'Territory', 'Country']
-      - name: country_type_desc
-        description: "Descripción detallada del tipo de país"
-
-  - name: dim_gdelt_quad_class
-    description: "Clasificación de eventos en 4 categorías de cooperación y conflicto"
-    columns:
-      - name: quad_class_id
-        description: "Identificador de la clase (1-4)"
-        tests:
-          - unique
-          - not_null
-          - accepted_values:
-              arguments:
-                values: [1, 2, 3, 4]
-      - name: quad_class_name
-        description: "Nombre de la clase"
-        tests:
-          - not_null
-      - name: quad_class_desc
-        description: "Descripción detallada de la clase"
-
-  - name: dim_gdelt_geo_location_type
-    description: "Tipos de ubicación geográfica en GDELT"
-    columns:
-      - name: geo_location_type_id
-        description: "Identificador del tipo de ubicación (0-5)"
-        tests:
-          - unique
-          - not_null
-          - accepted_values:
-              arguments:
-                values: [0, 1, 2, 3, 4, 5]
-      - name: geo_location_type_name
-        description: "Nombre del tipo de ubicación"
-        tests:
-          - not_null
-      - name: geo_location_type_desc
-        description: "Descripción detallada del tipo de ubicación"
-
-  - name: dim_gdelt_cameo_root
-    description: "20 categorías raíz del sistema CAMEO de clasificación de eventos"
-    columns:
-      - name: cameo_root_id
-        description: "Código raíz CAMEO de 2 dígitos"
-        tests:
-          - unique
-          - not_null
-      - name: cameo_code_desc
-        description: "Descripción de la categoría raíz"
-        tests:
-          - not_null
-
-  - name: dim_gdelt_religion
-    description: "Religiones con jerarquía padre-hijo"
-    columns:
-      - name: religion_id
-        description: "Código de religión CAMEO"
-        tests:
-          - unique
-          - not_null
-      - name: religion_name
-        description: "Nombre de la religión"
-        tests:
-          - not_null
-      - name: parent_id
-        description: "Código de la religión padre"
-      - name: parent_name
-        description: "Nombre de la religión padre"
-
-  - name: dim_gdelt_known_group
-    description: "Grupos y organizaciones internacionales conocidos"
-    columns:
-      - name: known_group_id
-        description: "Código del grupo conocido"
-        tests:
-          - unique
-          - not_null
-      - name: known_group_name
-        description: "Nombre del grupo conocido"
-        tests:
-          - not_null
-
-  - name: dim_gdelt_type_actor
-    description: "Tipos de actor según clasificación CAMEO"
+  - name: __stg_actor_types_list
+    description: "Staging de tipos de actor CAMEO"
     columns:
       - name: actor_type_id
         description: "Código del tipo de actor"
@@ -118,225 +17,166 @@ models:
       - name: actor_type_desc
         description: "Descripción del tipo de actor"
 
-  - name: dim_gdelt_date
-    description: "Dimensión de fechas basada en las fechas reales de los eventos"
+  - name: __stg_country_list
+    description: "Staging de países con conversión FIPS a ISO3 y clasificación por tipo"
     columns:
-      - name: date_id
-        description: "Identificador de fecha en formato YYYYMMDD"
-        tests:
-          - unique
-          - not_null
-      - name: full_date
-        description: "Fecha completa"
-        tests:
-          - unique
-          - not_null
-      - name: year
-        description: "Año"
+      - name: country_code
+        description: "Código original tal como viene en GDELT — puede ser FIPS o ISO3"
         tests:
           - not_null
-      - name: month
-        description: "Mes numérico"
+      - name: fips_code
+        description: "Código FIPS de 2 letras"
+      - name: iso3_code
+        description: "Código ISO3 de 3 letras estándar internacional"
         tests:
-          - not_null
-      - name: month_name
-        description: "Nombre del mes"
-        tests:
-          - not_null
-      - name: quarter
-        description: "Trimestre"
-        tests:
-          - not_null
-          - accepted_values:
-              arguments:
-                values: [1, 2, 3, 4]
-      - name: week_of_year
-        description: "Semana del año"
-        tests:
-          - not_null
-      - name: day_of_week
-        description: "Día de la semana numérico"
-        tests:
-          - not_null
-      - name: day_name
-        description: "Nombre del día de la semana"
-        tests:
-          - not_null
-      - name: is_weekend
-        description: "Indica si es fin de semana"
-        tests:
-          - not_null
-
-  # =============================================================================
-  # DIMENSIONES CON DEPENDENCIAS
-  # =============================================================================
-
-  - name: dim_gdelt_country
-    description: "Países, territorios y regiones geográficas normalizados a ISO3"
-    columns:
-      - name: country_id
-        description: "Código ISO3 del país"
-        tests:
-          - unique
           - not_null
       - name: country_name
         description: "Nombre completo del país"
         tests:
           - not_null
       - name: country_type_id
-        description: "FK hacia dim_country_type"
-        tests:
-          - not_null
-          - relationships:
-              arguments:
-                to: ref('dim_gdelt_country_type')
-                field: country_type_id
-
-  - name: dim_gdelt_cameo_full
-    description: "Códigos CAMEO completos de 3 y 4 dígitos con descripción"
-    columns:
-      - name: cameo_full_id
-        description: "Código CAMEO completo"
-        tests:
-          - unique
-          - not_null
-      - name: cameo_code_desc
-        description: "Descripción del código CAMEO"
-      - name: cameo_root_id
-        description: "FK hacia dim_cameo_root"
-        tests:
-          - not_null
-          - relationships:
-              arguments:
-                to: ref('dim_gdelt_cameo_root')
-                field: cameo_root_id
-      - name: cameo_subcode
-        description: "Subcódigo del evento"
-
-  - name: dim_gdelt_geo_locations
-    description: "Ubicaciones geográficas únicas donde ocurren los eventos"
-    columns:
-      - name: geo_locations_id
-        description: "Hash MD5 de la ubicación"
-        tests:
-          - unique
-          - not_null
-      - name: action_geo_fullname
-        description: "Nombre completo de la ubicación"
-      - name: country_id
-        description: "FK hacia dim_country"
-        tests:
-          - relationships:
-              arguments:
-                to: ref('dim_gdelt_country')
-                field: country_id
-      - name: geo_location_type_id
-        description: "FK hacia dim_geo_location_type"
-        tests:
-          - not_null
-          - relationships:
-              arguments:
-                to: ref('dim_gdelt_geo_location_type')
-                field: geo_location_type_id
-
-  - name: dim_gdelt_actor
-    description: "Actores únicos identificados en los eventos GDELT"
-    columns:
-      - name: actor_id
-        description: "Hash MD5 de actor_code + actor_name"
-        tests:
-          - unique
-          - not_null
-      - name: actor_name
-        description: "Nombre del actor"
-      - name: actor_code
-        description: "Código completo del actor en GDELT"
-      - name: country_id
-        description: "FK hacia dim_country"
-        tests:
-          - relationships:
-              arguments:
-                to: ref('dim_gdelt_country')
-                field: country_id
-      - name: known_group_id
-        description: "FK hacia dim_known_group"
-        tests:
-          - relationships:
-              arguments:
-                to: ref('dim_gdelt_known_group')
-                field: known_group_id
-      - name: religion1_id
-        description: "FK hacia dim_religion (religión principal)"
-        tests:
-          - relationships:
-              arguments:
-                to: ref('dim_gdelt_religion')
-                field: religion_id
-      - name: religion2_id
-        description: "FK hacia dim_religion (religión secundaria)"
-        tests:
-          - relationships:
-              arguments:
-                to: ref('dim_gdelt_religion')
-                field: religion_id
-
-  # =============================================================================
-  # TABLA PUENTE
-  # =============================================================================
-
-  - name: dim_int_actor_actor_type
-    description: "Tabla puente entre actores y sus tipos (relación N:M)"
-    columns:
-      - name: actor_id
-        description: "FK hacia dim_actor"
-        tests:
-          - not_null
-          - relationships:
-              arguments:
-                to: ref('dim_gdelt_actor')
-                field: actor_id
-      - name: actor_type_id
-        description: "FK hacia dim_actor_type"
-        tests:
-          - not_null
-          - relationships:
-              arguments:
-                to: ref('dim_gdelt_type_actor')
-                field: actor_type_id
-      - name: type_order
-        description: "Orden del tipo de actor (1=principal, 2=secundario, 3=terciario)"
+        description: "Tipo de país: 1=región, 2=territorio, 3=país"
         tests:
           - not_null
           - accepted_values:
               arguments:
                 values: [1, 2, 3]
 
-  # =============================================================================
-  # TABLA DE HECHOS
-  # =============================================================================
-
-  - name: fact_gdelt_events
-    description: "Tabla de hechos central con todos los eventos GDELT"
+  - name: __stg_ethnic_list
+    description: "Staging de grupos étnicos CAMEO"
     columns:
-      - name: event_id
-        description: "Identificador único del evento GDELT"
+      - name: ethnic_id
+        description: "Código del grupo étnico"
         tests:
           - unique
           - not_null
-      - name: date_id
-        description: "FK hacia dim_date"
+      - name: ethnic_name
+        description: "Nombre del grupo étnico"
         tests:
           - not_null
-          - relationships:
-              arguments:
-                to: ref('dim_gdelt_date')
-                field: date_id
+
+  - name: __stg_gdelt_cameo_code_list
+    description: "Staging de códigos CAMEO completos con descripción"
+    columns:
+      - name: cameo_code_full_id
+        description: "Código CAMEO completo de 3 o 4 dígitos"
+        tests:
+          - unique
+          - not_null
+      - name: cameo_code_desc
+        description: "Descripción del código CAMEO"
+        tests:
+          - not_null
+
+  - name: __stg_known_group_list
+    description: "Staging de grupos y organizaciones internacionales conocidos"
+    columns:
+      - name: known_group_id
+        description: "Código del grupo conocido"
+      - name: known_group_name
+        description: "Nombre del grupo conocido"
+
+  - name: __stg_religion_list
+    description: "Staging de religiones CAMEO con jerarquía padre-hijo"
+    columns:
+      - name: religion_id
+        description: "Código de religión CAMEO"
+        tests:
+          - unique
+          - not_null
+      - name: religion_name
+        description: "Nombre de la religión"
+        tests:
+          - not_null
+      - name: parent_id
+        description: "Código de la religión padre — NULL si es religión raíz"
+
+  - name: __stg_gdelt_export
+    description: "Staging principal de GDELT export. Castea tipos, genera hashes MD5 para actores y geo, y normaliza códigos de país a ISO3."
+    columns:
+      - name: event_id
+        description: "ID único del evento GDELT"
+        tests:
+          - not_null
+      - name: event_date
+        description: "Fecha del evento en formato DATE"
+        tests:
+          - not_null
+      - name: date_added
+        description: "Timestamp exacto en que GDELT procesó el evento"
       - name: source_url
         description: "URL del artículo fuente"
-      - name: is_root_event
-        description: "Indica si es el evento principal del artículo"
+      - name: actor1_code
+        description: "Código completo del actor 1 en GDELT"
+      - name: actor1_name
+        description: "Nombre del actor 1"
+      - name: actor1_id
+        description: "Hash MD5 de actor1_code + actor1_name — identificador único del actor 1"
         tests:
           - not_null
+      - name: actor1_country_code
+        description: "Código de país del actor 1 — puede ser FIPS o ISO3"
+      - name: actor1_known_group_code
+        description: "Código de grupo conocido del actor 1"
+      - name: actor1_ethnic_code
+        description: "Código étnico del actor 1"
+      - name: actor1_religion1_code
+        description: "Religión principal del actor 1"
+      - name: actor1_religion2_code
+        description: "Religión secundaria del actor 1"
+      - name: actor1_type1_code
+        description: "Tipo principal del actor 1"
+      - name: actor1_type2_code
+        description: "Tipo secundario del actor 1"
+      - name: actor1_type3_code
+        description: "Tipo terciario del actor 1"
+      - name: actor2_code
+        description: "Código completo del actor 2 en GDELT"
+      - name: actor2_name
+        description: "Nombre del actor 2"
+      - name: actor2_id
+        description: "Hash MD5 de actor2_code + actor2_name — identificador único del actor 2"
+        tests:
+          - not_null
+      - name: actor2_country_code
+        description: "Código de país del actor 2 — puede ser FIPS o ISO3"
+      - name: actor2_known_group_code
+        description: "Código de grupo conocido del actor 2"
+      - name: actor2_ethnic_code
+        description: "Código étnico del actor 2"
+      - name: actor2_religion1_code
+        description: "Religión principal del actor 2"
+      - name: actor2_religion2_code
+        description: "Religión secundaria del actor 2"
+      - name: actor2_type1_code
+        description: "Tipo principal del actor 2"
+      - name: actor2_type2_code
+        description: "Tipo secundario del actor 2"
+      - name: actor2_type3_code
+        description: "Tipo terciario del actor 2"
+      - name: is_root_event
+        description: "TRUE si es el evento principal del artículo"
+        tests:
+          - not_null
+      - name: cameo_code_id
+        description: "Código CAMEO completo del evento"
+        tests:
+          - not_null
+      - name: event_subcode
+        description: "Subcódigo del evento — últimos 2 dígitos del cameo_code_id"
+      - name: event_base_code
+        description: "Código CAMEO de 3 dígitos — nivel intermedio"
+      - name: event_root_code
+        description: "Código CAMEO de 2 dígitos — nivel raíz"
+        tests:
+          - not_null
+      - name: quad_class_id
+        description: "Clasificación del evento en 4 categorías (1-4)"
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: [1, 2, 3, 4]
       - name: goldstein_scale
         description: "Puntuación de impacto geopolítico (-10 a +10)"
       - name: num_mentions
@@ -346,45 +186,26 @@ models:
       - name: num_articles
         description: "Número de artículos que cubren el evento"
       - name: avg_tone
-        description: "Tono promedio de la cobertura mediática"
-      - name: actor1_id
-        description: "FK hacia dim_actor (actor iniciador)"
-        tests:
-          - relationships:
-              arguments:
-                to: ref('dim_gdelt_actor')
-                field: actor_id
-      - name: actor2_id
-        description: "FK hacia dim_actor (actor receptor)"
-        tests:
-          - relationships:
-              arguments:
-                to: ref('dim_gdelt_actor')
-                field: actor_id
-      - name: cameo_code_id
-        description: "FK hacia dim_cameo_full"
-        tests:
-          - not_null
-          - relationships:
-              arguments:
-                to: ref('dim_gdelt_cameo_full')
-                field: cameo_full_id
-      - name: quad_class_id
-        description: "FK hacia dim_quad_class"
-        tests:
-          - not_null
-          - relationships:
-              arguments:
-                to: ref('dim_gdelt_quad_class')
-                field: quad_class_id
+        description: "Tono promedio de la cobertura mediática (-100 a +100)"
       - name: geo_locations_id
-        description: "FK hacia dim_geo_locations"
-        tests:
-          - relationships:
-              arguments:
-                to: ref('dim_gdelt_geo_locations')
-                field: geo_locations_id
+        description: "Hash MD5 de fullname + iso3_code + geo_type — identificador único de la ubicación"
+      - name: action_geo_type
+        description: "Tipo de ubicación geográfica (0-5)"
+      - name: action_geo_fullname
+        description: "Nombre completo de la ubicación"
+      - name: action_geo_country_code
+        description: "Código de país de la ubicación"
+      - name: action_geo_adm1_code
+        description: "Región administrativa nivel 1"
+      - name: action_geo_adm2_code
+        description: "Región administrativa nivel 2"
+      - name: action_geo_lat
+        description: "Latitud de la ubicación"
+      - name: action_geo_long
+        description: "Longitud de la ubicación"
       - name: loaded_at
         description: "Timestamp de carga en bronze"
+        tests:
+          - not_null
       - name: source_file
         description: "Nombre del fichero fuente en S3"

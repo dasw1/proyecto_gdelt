@@ -1,0 +1,170 @@
+version: 2
+
+models:
+
+  - name: dim_actor
+    description: "Dimensión de actores desnormalizada — incluye nombre del país directamente para facilitar el análisis en gold"
+    columns:
+      - name: actor_id
+        description: "Hash MD5 de actor_code + actor_name — clave única del actor"
+        tests:
+          - unique
+          - not_null
+      - name: actor_name
+        description: "Nombre del actor"
+      - name: actor_code
+        description: "Código completo del actor en GDELT"
+      - name: country_name
+        description: "Nombre completo del país del actor — desnormalizado desde int_gdelt_country"
+
+  - name: dim_cameo
+    description: "Dimensión CAMEO desnormalizada — incluye descripción del código completo y del código raíz"
+    columns:
+      - name: cameo_full_id
+        description: "Código CAMEO completo de 3 o 4 dígitos"
+        tests:
+          - unique
+          - not_null
+      - name: cameo_code_desc
+        description: "Descripción del código CAMEO completo"
+      - name: cameo_root_desc
+        description: "Descripción de la categoría raíz CAMEO"
+
+  - name: dim_date
+    description: "Dimensión de fechas — réplica de int_gdelt_date para gold"
+    columns:
+      - name: date_id
+        description: "Identificador de fecha en formato YYYYMMDD"
+        tests:
+          - unique
+          - not_null
+      - name: full_date
+        description: "Fecha completa"
+        tests:
+          - not_null
+      - name: year
+        description: "Año"
+        tests:
+          - not_null
+      - name: month
+        description: "Mes numérico"
+        tests:
+          - not_null
+      - name: month_name
+        description: "Nombre del mes"
+        tests:
+          - not_null
+      - name: quarter
+        description: "Trimestre"
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: [1, 2, 3, 4]
+      - name: week_of_year
+        description: "Semana del año"
+        tests:
+          - not_null
+      - name: day_of_week
+        description: "Día de la semana numérico"
+        tests:
+          - not_null
+      - name: day_name
+        description: "Nombre del día de la semana"
+        tests:
+          - not_null
+      - name: is_weekend
+        description: "TRUE si es fin de semana"
+        tests:
+          - not_null
+
+  - name: dim_quad_class
+    description: "Dimensión de clasificación de eventos — réplica de int_gdelt_quad_class para gold"
+    columns:
+      - name: quad_class_id
+        description: "Identificador de la clase (1-4)"
+        tests:
+          - unique
+          - not_null
+          - accepted_values:
+              arguments:
+                values: [1, 2, 3, 4]
+      - name: quad_class_name
+        description: "Nombre de la clase"
+        tests:
+          - not_null
+      - name: quad_class_desc
+        description: "Descripción detallada de la clase"
+        tests:
+          - not_null
+
+  - name: fact_events
+    description: "Tabla de hechos principal de gold — expone los eventos GDELT listos para análisis y casos de uso"
+    columns:
+      - name: event_id
+        description: "ID único del evento GDELT"
+        tests:
+          - unique
+          - not_null
+      - name: date_id
+        description: "FK hacia dim_date"
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_date')
+                field: date_id
+      - name: date_added
+        description: "Timestamp exacto de procesado por GDELT — usado para deduplicar versiones del mismo evento"
+      - name: source_url
+        description: "URL del artículo fuente"
+      - name: is_root_event
+        description: "TRUE si es el evento principal del artículo"
+        tests:
+          - not_null
+      - name: goldstein_scale
+        description: "Puntuación de impacto geopolítico (-10 a +10)"
+      - name: num_mentions
+        description: "Número de menciones del evento"
+      - name: num_sources
+        description: "Número de fuentes que cubren el evento"
+      - name: num_articles
+        description: "Número de artículos que cubren el evento"
+      - name: avg_tone
+        description: "Tono promedio de la cobertura mediática (-100 a +100)"
+      - name: actor1_id
+        description: "FK hacia dim_actor (actor iniciador)"
+        tests:
+          - relationships:
+              arguments:
+                to: ref('dim_actor')
+                field: actor_id
+      - name: actor2_id
+        description: "FK hacia dim_actor (actor receptor)"
+        tests:
+          - relationships:
+              arguments:
+                to: ref('dim_actor')
+                field: actor_id
+      - name: cameo_code_id
+        description: "FK hacia dim_cameo"
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_cameo')
+                field: cameo_full_id
+      - name: quad_class_id
+        description: "FK hacia dim_quad_class"
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_quad_class')
+                field: quad_class_id
+      - name: loaded_at
+        description: "Timestamp de carga en bronze"
+        tests:
+          - not_null
+      - name: source_file
+        description: "Nombre del fichero fuente en S3"
