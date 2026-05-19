@@ -15,7 +15,7 @@ SELECT
     TRIM(UPPER(ACTOR1KNOWNGROUPCODE))                                       AS actor1_known_group_code,
     TRIM(UPPER(COALESCE(ACTOR1ETHNICCODE, 'NS')))                                      AS actor1_ethnic_code,
     TRIM(UPPER(COALESCE(ACTOR1RELIGION1CODE, 'NS')))                                        AS actor1_religion1_code,
-    TRIM(UPPER(COALESCE(ACTOR1RELIGION2CODE, 'NS')))          COALESCE(ACTOR1RELIGION2CODE, 'NS')                              AS actor1_religion2_code,
+    TRIM(UPPER(COALESCE(ACTOR1RELIGION2CODE, 'NS')))                                          AS actor1_religion2_code,
     TRIM(UPPER(ACTOR1TYPE1CODE))                                            AS actor1_type1_code,
     TRIM(UPPER(ACTOR1TYPE2CODE))                                            AS actor1_type2_code,
     TRIM(UPPER(ACTOR1TYPE3CODE))                                            AS actor1_type3_code,
