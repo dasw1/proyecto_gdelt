@@ -42,7 +42,7 @@ models:
 
       - name: total_events
         description: "Número total de eventos entre los dos países"
-        data_type: number
+        data_type: number(38,0)
         constraints:
           - type: not_null
         tests:
@@ -89,7 +89,7 @@ models:
 
       - name: total_articles
         description: "Suma total de artículos que cubren los eventos entre los dos países"
-        data_type: number
+        data_type: number(38,0)
         constraints:
           - type: not_null
         tests:
@@ -97,7 +97,7 @@ models:
 
       - name: total_mentions
         description: "Suma total de menciones de los eventos entre los dos países"
-        data_type: number
+        data_type: number(38,0)
         constraints:
           - type: not_null
         tests:
@@ -105,7 +105,7 @@ models:
 
       - name: avg_articles_per_event
         description: "Promedio de artículos por evento — indica la relevancia mediática media"
-        data_type: number
+        data_type: number(38,6)
         constraints:
           - type: not_null
         tests:
@@ -119,7 +119,7 @@ models:
     columns:
       - name: date_id
         description: "FK hacia dim_date"
-        data_type: number
+        data_type: number(38,0)
         constraints:
           - type: not_null
         tests:
@@ -155,7 +155,7 @@ models:
 
       - name: total_events
         description: "Número total de eventos para esa combinación de actor, fecha y tipo CAMEO"
-        data_type: number
+        data_type: number(38,0)
         constraints:
           - type: not_null
         tests:
@@ -171,7 +171,7 @@ models:
 
       - name: avg_articles
         description: "Promedio de artículos por evento — cobertura mediática"
-        data_type: number
+        data_type: number(38,6)
         constraints:
           - type: not_null
         tests:
@@ -179,7 +179,7 @@ models:
 
       - name: avg_mentions
         description: "Promedio de menciones por evento"
-        data_type: number
+        data_type: number(38,6)
         constraints:
           - type: not_null
         tests:
