@@ -3,6 +3,9 @@ version: 2
 models:
 
   - name: fact_bilateral_relations
+    config:
+      contract:
+        enforced: true
     description: "Relaciones bilaterales entre países basada en eventos GDELT. Usa la versión más reciente de cada evento. Agrega métricas de cooperación y conflicto entre cada par de países. Normalizado — usa country_id como FK hacia dim_actor."
     columns:
       - name: country_from
@@ -62,6 +65,10 @@ models:
           - not_null
 
   - name: fact_media_noise
+    config:
+      contract:
+        enforced: true
+        
     description: "Índice de ruido mediático por actor, fecha y código CAMEO. Normalizado — usa actor_id y cameo_full_id como FKs. Detecta qué eventos reciben cobertura desproporcionada respecto a su impacto geopolítico real."
     columns:
       - name: date_id
