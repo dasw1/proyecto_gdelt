@@ -2,7 +2,7 @@ version: 2
 
 models:
 
-  - name: __stg_actor_types_list
+  - name: __stg_actor_type_list
     description: "Staging de tipos de actor CAMEO"
     columns:
       - name: actor_type_id
