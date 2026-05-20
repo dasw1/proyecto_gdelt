@@ -99,6 +99,9 @@ models:
           - not_null
 
   - name: fact_events
+    config:
+      contract:
+        enforced: true
     description: "Tabla de hechos principal de gold — expone los eventos GDELT listos para análisis y casos de uso"
     columns:
       - name: event_id
