@@ -6,43 +6,81 @@ models:
     config:
       contract:
         enforced: true
-    description: "Relaciones bilaterales entre países basada en eventos GDELT. Usa la versión más reciente de cada evento. Agrega métricas de cooperación y conflicto entre cada par de países. Normalizado — usa country_id como FK hacia dim_actor."
+    description: "Relaciones bilaterales entre países basada en eventos GDELT. Usa la versión más reciente de cada evento. Agrega métricas de cooperación y conflicto entre cada par de países."
     columns:
+      - name: actor1_id
+        description: "FK hacia dim_actor — ID del actor que inicia la acción"
+        data_type: varchar
+        constraints:
+          - type: not_null
+        tests:
+          - not_null
+
       - name: country_from
-        description: "FK hacia dim_actor — país que inicia la acción (actor1)"
+        description: "Nombre del país que inicia la acción (actor1)"
+        data_type: varchar
+        constraints:
+          - type: not_null
+        tests:
+          - not_null
+
+      - name: actor2_id
+        description: "FK hacia dim_actor — ID del actor que recibe la acción"
+        data_type: varchar
+        constraints:
+          - type: not_null
         tests:
           - not_null
 
       - name: country_to
-        description: "FK hacia dim_actor — país que recibe la acción (actor2)"
+        description: "Nombre del país que recibe la acción (actor2)"
+        data_type: varchar
+        constraints:
+          - type: not_null
         tests:
           - not_null
 
       - name: total_events
         description: "Número total de eventos entre los dos países"
+        data_type: number
+        constraints:
+          - type: not_null
         tests:
           - not_null
 
       - name: avg_goldstein
         description: "Promedio de GoldsteinScale — impacto teórico de los eventos (-10 a +10)"
+        data_type: float
+        constraints:
+          - type: not_null
         tests:
           - not_null
 
       - name: avg_tone
         description: "Promedio del tono mediático de los artículos que cubren los eventos"
+        data_type: float
+        constraints:
+          - type: not_null
         tests:
           - not_null
 
       - name: narrative_vs_reality_value
-        description: "Valor numérico combinado de avg_goldstein + avg_tone — útil para ordenar relaciones"
+        description: "Valor numérico combinado de avg_goldstein + avg_tone"
+        data_type: float
+        constraints:
+          - type: not_null
         tests:
           - not_null
 
-      - name: dominant_cameo_root
-        description: "Descripción del tipo de evento CAMEO más frecuente entre los dos países"
+      - name: cameo_full_id
+        description: "Código CAMEO más frecuente entre los dos países (MODE)"
+        data_type: varchar
 
       - name: narrative_vs_reality
         description: "Detecta divergencias entre el tipo de acción real y la narrativa mediática"
+        data_type: varchar
+        constraints:
+          - type: not_null
         tests:
           - not_null
           - accepted_values:
@@ -51,16 +89,25 @@ models:
 
       - name: total_articles
         description: "Suma total de artículos que cubren los eventos entre los dos países"
+        data_type: number
+        constraints:
+          - type: not_null
         tests:
           - not_null
 
       - name: total_mentions
         description: "Suma total de menciones de los eventos entre los dos países"
+        data_type: number
+        constraints:
+          - type: not_null
         tests:
           - not_null
 
       - name: avg_articles_per_event
         description: "Promedio de artículos por evento — indica la relevancia mediática media"
+        data_type: number
+        constraints:
+          - type: not_null
         tests:
           - not_null
 
@@ -68,11 +115,13 @@ models:
     config:
       contract:
         enforced: true
-        
-    description: "Índice de ruido mediático por actor, fecha y código CAMEO. Normalizado — usa actor_id y cameo_full_id como FKs. Detecta qué eventos reciben cobertura desproporcionada respecto a su impacto geopolítico real."
+    description: "Índice de ruido mediático por actor, fecha y código CAMEO. Detecta qué eventos reciben cobertura desproporcionada respecto a su impacto geopolítico real."
     columns:
       - name: date_id
         description: "FK hacia dim_date"
+        data_type: number
+        constraints:
+          - type: not_null
         tests:
           - not_null
           - relationships:
@@ -82,6 +131,9 @@ models:
 
       - name: actor_id
         description: "FK hacia dim_actor"
+        data_type: varchar
+        constraints:
+          - type: not_null
         tests:
           - not_null
           - relationships:
@@ -91,6 +143,9 @@ models:
 
       - name: cameo_full_id
         description: "FK hacia dim_cameo"
+        data_type: varchar
+        constraints:
+          - type: not_null
         tests:
           - not_null
           - relationships:
@@ -100,29 +155,45 @@ models:
 
       - name: total_events
         description: "Número total de eventos para esa combinación de actor, fecha y tipo CAMEO"
+        data_type: number
+        constraints:
+          - type: not_null
         tests:
           - not_null
 
       - name: avg_goldstein
         description: "Promedio de GoldsteinScale — impacto geopolítico real (-10 a +10)"
+        data_type: float
+        constraints:
+          - type: not_null
         tests:
           - not_null
 
       - name: avg_articles
         description: "Promedio de artículos por evento — cobertura mediática"
+        data_type: number
+        constraints:
+          - type: not_null
         tests:
           - not_null
 
       - name: avg_mentions
         description: "Promedio de menciones por evento"
+        data_type: number
+        constraints:
+          - type: not_null
         tests:
           - not_null
 
       - name: noise_index
         description: "Índice de ruido — ratio entre cobertura mediática e impacto real"
+        data_type: float
 
       - name: noise_category
         description: "Clasificación del nivel de distorsión mediática"
+        data_type: varchar
+        constraints:
+          - type: not_null
         tests:
           - not_null
           - accepted_values:
