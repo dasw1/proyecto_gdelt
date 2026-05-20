@@ -8,7 +8,7 @@ source as (
 
 renamed as (
 
-    select
+    select 
         trim(upper(country_code)) as country_code,
         trim(upper(fips_code)) as fips_code,
         trim(upper(iso3_code)) as iso3_code,

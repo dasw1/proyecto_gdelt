@@ -1,4 +1,3 @@
-
 WITH actors AS (
     SELECT DISTINCT
         actor1_id                               AS actor_id,
