@@ -105,7 +105,7 @@ models:
 
       - name: avg_articles_per_event
         description: "Promedio de artículos por evento — indica la relevancia mediática media"
-        data_type: float
+        data_type: number
         constraints:
           - type: not_null
         tests:
@@ -171,7 +171,7 @@ models:
 
       - name: avg_articles
         description: "Promedio de artículos por evento — cobertura mediática"
-        data_type: float
+        data_type: number
         constraints:
           - type: not_null
         tests:
@@ -179,7 +179,7 @@ models:
 
       - name: avg_mentions
         description: "Promedio de menciones por evento"
-        data_type: float
+        data_type: number
         constraints:
           - type: not_null
         tests:
