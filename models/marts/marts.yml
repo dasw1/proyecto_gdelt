@@ -6,26 +6,10 @@ models:
     config:
       contract:
         enforced: true
-    description: "Relaciones bilaterales entre países basada en eventos GDELT. Usa la versión más reciente de cada evento. Agrega métricas de cooperación y conflicto entre cada par de países."
+    description: "Relaciones bilaterales entre países basada en eventos GDELT. Usa la versión más reciente de cada evento. Agrega métricas de cooperación y conflicto entre cada par de países. PK: country_from + country_to."
     columns:
-      - name: actor1_id
-        description: "FK hacia dim_actor — ID del actor que inicia la acción"
-        data_type: varchar
-        constraints:
-          - type: not_null
-        tests:
-          - not_null
-
       - name: country_from
-        description: "Nombre del país que inicia la acción (actor1)"
-        data_type: varchar
-        constraints:
-          - type: not_null
-        tests:
-          - not_null
-
-      - name: actor2_id
-        description: "FK hacia dim_actor — ID del actor que recibe la acción"
+        description: "País que inicia la acción — parte de la PK compuesta"
         data_type: varchar
         constraints:
           - type: not_null
@@ -33,7 +17,7 @@ models:
           - not_null
 
       - name: country_to
-        description: "Nombre del país que recibe la acción (actor2)"
+        description: "País que recibe la acción — parte de la PK compuesta"
         data_type: varchar
         constraints:
           - type: not_null

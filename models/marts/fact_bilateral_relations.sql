@@ -10,15 +10,13 @@ WITH latest_events AS (
 )
 
 SELECT
-    a1.actor_id                                                             AS actor1_id,
     a1.country_name                                                         AS country_from,
-    a2.actor_id                                                             AS actor2_id,
     a2.country_name                                                         AS country_to,
     COUNT(*)                                                                AS total_events,
     COALESCE(AVG(f.goldstein_scale), 0)                                     AS avg_goldstein,
     COALESCE(AVG(f.avg_tone), 0)                                            AS avg_tone,
     COALESCE(AVG(f.goldstein_scale), 0) + COALESCE(AVG(f.avg_tone), 0)     AS narrative_vs_reality_value,
-    MODE(cf.cameo_full_id)                                                AS cameo_full_id,
+    MODE(cf.cameo_full_id)                                                  AS cameo_full_id,
     CASE
         WHEN AVG(f.goldstein_scale) >= 0 AND AVG(f.avg_tone) < 0 
             THEN 'Cooperation under tension'
@@ -40,5 +38,5 @@ WHERE a1.country_name IS NOT NULL
   AND a2.country_name IS NOT NULL
   AND a1.country_name != a2.country_name
 GROUP BY 
-    a1.actor_id, a1.country_name,
-    a2.actor_id, a2.country_name
+    a1.country_name,
+    a2.country_name

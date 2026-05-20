@@ -1,7 +1,7 @@
 SELECT 
-    actor1_id,
-    actor2_id,
+    country_from,
+    country_to,
     COUNT(*) AS cnt
 FROM {{ ref('fact_bilateral_relations') }}
-GROUP BY actor1_id, actor2_id
+GROUP BY country_from, country_to
 HAVING COUNT(*) > 1
